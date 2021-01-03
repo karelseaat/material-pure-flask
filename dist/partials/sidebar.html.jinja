@@ -1,0 +1,100 @@
+<div class="mdl-layout__drawer">
+  <header>Device bord</header>
+  <div class="scroll__wrapper" id="scroll__wrapper">
+    <div class="scroller" id="scroller">
+      <div class="scroll__container" id="scroll__container">
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link mdl-navigation__link--current" href="index">
+            <i class="material-icons" role="presentation">dashboard</i>
+            Dashboard
+          </a>
+          <div class="sub-navigation">
+            <a class="mdl-navigation__link">
+              <i class="material-icons">view_comfy</i>
+              UI
+              <i class="material-icons">keyboard_arrow_down</i>
+            </a>
+            <div class="mdl-navigation">
+              <a class="mdl-navigation__link" href="ui-buttons">
+                Buttons
+              </a>
+              <a class="mdl-navigation__link" href="ui-cards">
+                Cards
+              </a>
+              <a class="mdl-navigation__link" href="ui-colors">
+                Colors
+              </a>
+              {# <a class="mdl-navigation__link" href="forms">
+                Forms
+              </a> #}
+              <a class="mdl-navigation__link" href="ui-icons">
+                Icons
+              </a>
+              <a class="mdl-navigation__link" href="ui-typography">
+                Typography
+              </a>
+              <a class="mdl-navigation__link" href="ui-tables">
+                Tables
+              </a>
+            </div>
+          </div>
+          {% if params.loggedin == True %}
+          <a class="mdl-navigation__link" href="ui-components">
+            <i class="material-icons">developer_board</i>
+            Components
+          </a>
+            {% endif %}
+
+            {% if params.loggedin == False %}
+            <a class="mdl-navigation__link" href="login">
+              <i class="material-icons">multiline_chart</i>
+              Sign in
+            </a>
+              {% endif %}
+          {# <a class="mdl-navigation__link" href="forms.html">
+            <i class="material-icons" role="presentation">person</i>
+            Account
+          </a> #}
+          {# <a class="mdl-navigation__link" href="maps.html">
+            <i class="material-icons" role="presentation">map</i>
+            Maps
+          </a> #}
+          {% if params.loggedin == True %}
+          <a class="mdl-navigation__link" href="charts">
+            <i class="material-icons">multiline_chart</i>
+            Charts
+          </a>
+            {% endif %}
+          <!-- <div class="sub-navigation">
+            <a class="mdl-navigation__link">
+              <i class="material-icons">pages</i>
+              Pages
+              <i class="material-icons">keyboard_arrow_down</i>
+            </a>
+            <div class="mdl-navigation">
+              <a class="mdl-navigation__link" href="login">
+                Sign in
+              </a>
+              <a class="mdl-navigation__link" href="sign-up">
+                Sign up
+              </a>
+              <a class="mdl-navigation__link" href="forgot-password">
+                Forgot password
+              </a>
+              <a class="mdl-navigation__link" href="404.html">
+                404
+              </a>
+            </div>
+          </div> -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- <hr>
+          <a class="mdl-navigation__link" href="https://github.com/CreativeIT/getmdl-dashboard">
+            <i class="material-icons" role="presentation">link</i>
+            GitHub
+          </a> -->
+        </nav>
+      </div>
+    </div>
+    <div class='scroller__bar' id="scroller__bar"></div>
+  </div>
+</div>

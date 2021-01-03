@@ -1,0 +1,32 @@
+1 opdelen van templates in onderdelen (done)
+2 inplementeren van de routes voor de andere onderdelen (done)
+3 verwijderen van onderdelen die niet nodig zijn (done)
+4 makden van device kaart onderdeel <<
+5 wat zoeken we met zoek icoon ? (nothing for now comment out !)
+
+1 git it !
+2 rest van de modellen toevoegen !
+3 toevoegen van message forms
+4 toevoegen van device forms
+5 toevoegen van message nitification link naar messages
+
+1 toevoegen van message delete ?
+2 toevoegen van message edit ?
+3 waarmee gaan we de dashboard vullen ?
+4 dashboard enkel als er in gelogd is !
+5 wat is de startpagina als je niet ingelogd bent ipv dashboard
+
+1 remove ui elements als je geen admin user bent of als je niet ingelogt bent, ofwel engel de uit elemnt in geval van admin user !
+2 regel de registatie form voor user en afhandeling
+3 regel de forgot password form en afhandeling
+4 Ergens heet de site nog darkboard ofzo een variable aanmaken voor de sitenaam
+5 de paginas moeten ook namen hebben zo niet aanmaken zo wel dan in router variabled gieten
+
+1 tabellen zo aanpassen dat je op de headers kunt klikken voor sortering !
+2 messages nieuw plus knop !
+3 account / user profile cancel knop !
+4 hebben we voor submt en cancel geen geschiedenis nodig van waar we zijn geweest ?
+5 wat gaan we doen met de settings knop bij user dropdown, is deze nog nuttig of mag deze verwijdert worden !?
+
+1 my account / user profile , de velden die er nodig zijn voor een user en of profile zitten er nog niet allemaal in, ff kijken wat er in kan en dat er in stoppen !
+2 my account / user profile mag ook die naam hebben als title !

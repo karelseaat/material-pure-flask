@@ -1,0 +1,42 @@
+<!doctype html>
+
+{% extends "base.html.jinja" %}
+
+{% block content %}
+<main class="mdl-layout__content ">
+  <div class="mdl-grid ui-tables">
+    <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone">
+      <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h1 class="mdl-card__title-text">Messages</h1>
+        </div>
+        <div class="mdl-card__supporting-text no-padding">
+          <table class="mdl-data-table mdl-js-data-table">
+            <thead>
+              <tr>
+                <th class="mdl-data-table__cell--non-numeric">#</th>
+                <th class="mdl-data-table__cell--non-numeric">Title</th>
+                <th class="mdl-data-table__cell--non-numeric">Created</th>
+                <th class="mdl-data-table__cell--non-numeric">User</th>
+                <th class="mdl-data-table__cell--non-numeric"> </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for message in params.messages %}
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{ message.id }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ message.title }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ message.created }}</td>
+                <td class="mdl-data-table__cell--non-numeric">bleh</td>
+                <td class="mdl-data-table__cell--non-numeric"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal pull-left">Delete</button><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal">Edit</button></td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

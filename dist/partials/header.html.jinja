@@ -1,0 +1,101 @@
+<header class="mdl-layout__header">
+{% if params.loggedin == True %}
+  <div class="mdl-layout__header-row">
+    <div class="mdl-layout-spacer"></div>
+    <!-- Search-->
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+        <i class="material-icons">search</i>
+      </label>
+
+      <div class="mdl-textfield__expandable-holder">
+        <input class="mdl-textfield__input" type="text" id="search" />
+        <label class="mdl-textfield__label" for="search">Enter your query...</label>
+      </div>
+    </div>
+
+    <div class="material-icons mdl-badge mdl-badge--overlap mdl-button--icon message" id="inbox" data-badge="{{ params.messagelen }}">
+      mail_outline
+    </div>
+    <!-- Messages dropdown-->
+    <ul class="mdl-menu mdl-list mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right mdl-shadow--2dp messages-dropdown" for="inbox">
+      <li class="mdl-list__item">
+        {{ params.messagelen }}
+      </li>
+
+      {% for message in params.messages %}
+      <li class="mdl-menu__item mdl-list__item mdl-list__item--two-line list__item--border-top">
+        <span class="mdl-list__item-primary-content">
+          <span class="mdl-list__item-avatar background-color--mint">
+            <text>D</text>
+          </span>
+          <span>{{ message.title }}</span>
+          <span class="mdl-list__item-sub-title">{{ message.content }}</span>
+        </span>
+        <span class="mdl-list__item-secondary-content">
+          <span class="label label--transparent">30 Nov</span>
+        </span>
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    <div class="avatar-dropdown" id="icon">
+      <span>{{ params.username }}</span>
+      <img src="data:image/jpeg;base64, {{ params.profile.user_image() }}" />
+    </div>
+    <!-- Account dropdawn-->
+    <ul class="mdl-menu mdl-list mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect mdl-shadow--2dp account-dropdown" for="icon">
+      <li class="mdl-list__item mdl-list__item--two-line">
+        <span class="mdl-list__item-primary-content">
+          <!-- <span class="material-icons mdl-list__item-avatar"></span> -->
+          <img src="data:image/jpeg;base64, {{ params.profile.user_image() }}" />
+          <span>{{ params.username }}</span>
+          <span class="mdl-list__item-sub-title">{{ params.useremail }}</span>
+        </span>
+      </li>
+      <li class="list__item--border-top"></li>
+      <li class="mdl-menu__item mdl-list__item">
+        <a href="profileform">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-icon">account_circle</i>
+          My account
+        </span>
+      </a>
+      </li>
+
+      <li class="list__item--border-top"></li>
+      <li class="mdl-menu__item mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-icon">settings</i>
+          Settings
+        </span>
+      </li>
+      <a href="logout">
+        <li class="mdl-menu__item mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-icon text-color--secondary">exit_to_app</i>
+            Log out
+          </span>
+        </li>
+      </a>
+    </ul>
+
+    <!-- <button id="more" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">more_vert</i>
+    </button>
+
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect mdl-shadow--2dp settings-dropdown" for="more">
+      <li class="mdl-menu__item">
+        Settings
+      </li>
+      <a class="mdl-menu__item" href="https://github.com/CreativeIT/getmdl-dashboard/issues">
+        Support
+      </a>
+      <li class="mdl-menu__item">
+        F.A.Q.
+      </li>
+    </ul> -->
+  </div>
+  {% endif %}
+</header>

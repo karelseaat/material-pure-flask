@@ -1,0 +1,17 @@
+<!-- inject:js -->
+<script src="js/d3.min.js"></script>
+<script src="js/getmdl-select.min.js"></script>
+<script src="js/material.min.js"></script>
+<script src="js/nv.d3.min.js"></script>
+<script src="js/layout/layout.min.js"></script>
+<script src="js/scroll/scroll.min.js"></script>
+<script src="js/widgets/charts/discreteBarChart.min.js"></script>
+<script src="js/widgets/charts/linePlusBarChart.min.js"></script>
+<script src="js/widgets/charts/stackedBarChart.min.js"></script>
+<script src="js/widgets/employer-form/employer-form.min.js"></script>
+<script src="js/widgets/line-chart/line-charts-nvd3.min.js"></script>
+<script src="js/widgets/map/maps.min.js"></script>
+<script src="js/widgets/pie-chart/pie-charts-nvd3.min.js"></script>
+<script src="js/widgets/table/table.min.js"></script>
+<script src="js/widgets/todo/todo.min.js"></script>
+<!-- endinject -->
