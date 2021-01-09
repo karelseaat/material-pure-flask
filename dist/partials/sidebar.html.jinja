@@ -4,10 +4,12 @@
     <div class="scroller" id="scroller">
       <div class="scroll__container" id="scroll__container">
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link mdl-navigation__link--current" href="index">
+          {% if params.loggedin == True %}
+          <a class="mdl-navigation__link mdl-navigation__link--current" href="/">
             <i class="material-icons" role="presentation">dashboard</i>
             Dashboard
           </a>
+          {% endif %}
           <div class="sub-navigation">
             <a class="mdl-navigation__link">
               <i class="material-icons">view_comfy</i>
@@ -24,9 +26,6 @@
               <a class="mdl-navigation__link" href="ui-colors">
                 Colors
               </a>
-              {# <a class="mdl-navigation__link" href="forms">
-                Forms
-              </a> #}
               <a class="mdl-navigation__link" href="ui-icons">
                 Icons
               </a>
@@ -65,6 +64,10 @@
             Charts
           </a>
             {% endif %}
+            <a class="mdl-navigation__link" href="index">
+              <i class="material-icons">multiline_chart</i>
+              Index
+            </a>
           <!-- <div class="sub-navigation">
             <a class="mdl-navigation__link">
               <i class="material-icons">pages</i>

@@ -23,12 +23,12 @@
             </thead>
             <tbody>
               {% for message in params.messages %}
-              <tr>
+              <tr onclick="window.location.href='/new_message'">
                 <td class="mdl-data-table__cell--non-numeric">{{ message.id }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ message.title }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ message.created }}</td>
                 <td class="mdl-data-table__cell--non-numeric">bleh</td>
-                <td class="mdl-data-table__cell--non-numeric"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal pull-left">Delete</button><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal">Edit</button></td>
+                <td class="mdl-data-table__cell--non-numeric"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal">View</button></td>
               </tr>
               {% endfor %}
 
@@ -36,7 +36,14 @@
           </table>
         </div>
       </div>
+
     </div>
+
   </div>
+  <div class="mdl-card__supporting-text mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone">
+    <button onclick="window.location.href='/new_message'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
+        <i class="material-icons">add</i>
+    </button>
+</div>
 </main>
 {% endblock %}

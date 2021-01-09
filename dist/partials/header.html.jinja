@@ -4,9 +4,9 @@
     <div class="mdl-layout-spacer"></div>
     <!-- Search-->
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-      <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+      <!-- <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
         <i class="material-icons">search</i>
-      </label>
+      </label> -->
 
       <div class="mdl-textfield__expandable-holder">
         <input class="mdl-textfield__input" type="text" id="search" />
@@ -24,7 +24,7 @@
       </li>
 
       {% for message in params.messages %}
-      <li class="mdl-menu__item mdl-list__item mdl-list__item--two-line list__item--border-top">
+      <li onclick="window.location.href='/new_device'" class="mdl-menu__item mdl-list__item mdl-list__item--two-line list__item--border-top">
         <span class="mdl-list__item-primary-content">
           <span class="mdl-list__item-avatar background-color--mint">
             <text>D</text>

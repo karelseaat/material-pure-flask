@@ -1,32 +1,55 @@
 1 opdelen van templates in onderdelen (done)
 2 inplementeren van de routes voor de andere onderdelen (done)
 3 verwijderen van onderdelen die niet nodig zijn (done)
-4 makden van device kaart onderdeel <<
-5 wat zoeken we met zoek icoon ? (nothing for now comment out !)
+4 makden van device kaart onderdeel (done)
+5 wat zoeken we met zoek icoon ? (nothing for now comment out !) (done)
 
-1 git it !
-2 rest van de modellen toevoegen !
-3 toevoegen van message forms
-4 toevoegen van device forms
-5 toevoegen van message nitification link naar messages
+1 git it ! (done)
+2 rest van de modellen toevoegen ! (done)
+3 toevoegen van message forms (done)
+4 toevoegen van device forms (done)
+5 toevoegen van message notification link naar messages (done)
 
-1 toevoegen van message delete ?
-2 toevoegen van message edit ?
-3 waarmee gaan we de dashboard vullen ?
-4 dashboard enkel als er in gelogd is !
-5 wat is de startpagina als je niet ingelogd bent ipv dashboard
+RPGSTART
+1 toevoegen van message delete ? (done)
+2 toevoegen van message edit ? (done)
+3 waarmee gaan we de dashboard vullen ? (company news, ltest updates, hoeveel verkeer je genereerd vs je limiet, je account status, je custom grafieken en of datatabellen) done)
+4 dashboard enkel als er in gelogd is ! (done)
+5 wat is de startpagina als je niet ingelogd bent ipv dashboard === een soort van welkomst pagina die uitlegt wat dit is en links naar andere onderdelen waar je wel bij mag als je niet bent ingelogt ! done)
 
-1 remove ui elements als je geen admin user bent of als je niet ingelogt bent, ofwel engel de uit elemnt in geval van admin user !
-2 regel de registatie form voor user en afhandeling
-3 regel de forgot password form en afhandeling
-4 Ergens heet de site nog darkboard ofzo een variable aanmaken voor de sitenaam
-5 de paginas moeten ook namen hebben zo niet aanmaken zo wel dan in router variabled gieten
+ORC
+1 regel de registatie form voor user en afhandeling <<
+2 regel de forgot password form en afhandeling <<
+3 Ergens heet de site nog darkboard ofzo een variable aanmaken voor de sitenaam ? <<
+4 de paginas moeten ook namen hebben zo niet aanmaken zo wel dan in router variabled gieten
+5 tabellen zo aanpassen dat je op de headers kunt klikken voor sortering !
 
-1 tabellen zo aanpassen dat je op de headers kunt klikken voor sortering !
-2 messages nieuw plus knop !
-3 account / user profile cancel knop !
-4 hebben we voor submt en cancel geen geschiedenis nodig van waar we zijn geweest ?
-5 wat gaan we doen met de settings knop bij user dropdown, is deze nog nuttig of mag deze verwijdert worden !?
+KLONT
+1 messages nieuw plus knop ! (done)
+2 account / user profile cancel knop !
+3 hebben we voor submt en cancel geen geschiedenis nodig van waar we zijn geweest ?
+4 wat gaan we doen met de settings knop bij user dropdown, is deze nog nuttig of mag deze verwijdert worden !?
+5 my account / user profile , de velden die er nodig zijn voor een user en of profile zitten er nog niet allemaal in, ff kijken wat er in kan en dat er in stoppen !
 
-1 my account / user profile , de velden die er nodig zijn voor een user en of profile zitten er nog niet allemaal in, ff kijken wat er in kan en dat er in stoppen !
-2 my account / user profile mag ook die naam hebben als title !
+NAGA
+1 my account / user profile mag ook die naam hebben als title !
+2 breadcrumbs ?
+3 401 pagina inrichten !
+4 material dashboard nog eens downloaden puur als voorbeeld !
+5 alle spul dat we niet nodig hebben weggooien !
+
+TROLL
+1 alles opruimen !
+2 handle device forms
+3 handle message forms
+4 toevoegen van delete voor messages
+5 delete voor devices
+
+GOBLIN
+1 variablen verzinnen voor de templates die in die template logika invullen zoals: welke form moet je heen voor edit delete new, agina title, cards controller etc
+2 het menu begint groot te worden er is een soort van partial nodig om het menu in op te slaan ! samen met loggedin en nog logged in stuff naam plus route !
+3 onderzoek dit: crosser.io
+4 internationalisatie ?
+5 heeft mij systeem base url nodig ?
+
+1 maken van een fout login page !

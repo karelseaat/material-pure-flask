@@ -23,6 +23,46 @@ def random_message(message):
     message.content = faker.text()
     return message
 
+def random_device(device):
+    fake = Faker()
+    device.name = fake.name().split(" ")[0]
+    device.created_at = fake.date_time_this_century()
+    device.last_seen = fake.date_time_this_century()
+    device.last_ip = fake.ipv4()
+    device.soft_version = "1.1.2"
+    device.hard_version = "2.1"
+    device.mac = fake.text(max_nb_chars=12)
+    return device
+
+def random_group(group):
+    faker = Faker()
+    group.name = faker.name().split(" ")[0]
+    return group
+
+def random_tags(tag):
+    faker = Faker()
+    tag.name = faker.name().split(" ")[0]
+    return tag
+
+def random_device_type(device_type):
+    fake = Faker()
+    device_type.name = fake.name().split(" ")[0]
+    device_type.soft_version = str(fake.pyfloat(min_value=0, max_value=5,right_digits=5))
+    device_type.hard_version = str(fake.pyfloat(min_value=0, max_value=5,right_digits=5))
+    return device_type
+
+def random_node_schema(node_schema):
+    fake = Faker()
+    d = dict()
+    d['first_name'] = fake.first_name()
+    d['last_name'] = fake.last_name()
+    d['personal_email'] =  fake.email()
+    d['ssn'] = fake.ssn()
+    node_schema.name = fake.name().split(" ")[0]
+    node_schema.schema = json.dumps(d)
+    node_schema.location = json.dumps(d)
+    return node_schema
+
 def random_user(user, profile):
     faker = Faker()
     user.pic_hash = faker.md5()
@@ -52,21 +92,30 @@ session = make_session()
 
 # test = session.query(User).all()
 
-# group = random_group(Group())
+
 
 f = open("usernamesandpass.txt", "w")
 longtxt = ""
 for value in range(10):
 
-    # for value in range(10):
-    #     atag = random_tags(Tag())
-    #     session.add(atag)
 
+    atag1 = random_tags(Tag())
+    atag2 = random_tags(Tag())
+    adevice_type = random_device_type(DeviceType())
+
+    group = random_group(Group())
     message = random_message(Message())
     auser, sometext = random_user(User(), UserProfile())
+    device = random_device(Device())
     longtxt += "{} - {}\n".format(*sometext)
-
+    device.tags.append(atag1)
+    device.tags.append(atag2)
+    device.device_type = adevice_type
+    anode_schema = random_node_schema(Node_schema())
+    auser.node_schemas.append(anode_schema)
+    auser.devices.append(device)
     auser.messages.append(message)
+    auser.groups.append(group)
     session.add(auser)
 
 f.write(longtxt)

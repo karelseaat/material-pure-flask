@@ -44,23 +44,42 @@ def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html.jinja', params = params), 404
 
+@app.errorhandler(401)
+def unauthorised(e):
+    params = everytime()
+    # note that we set the 404 status explicitly
+    return render_template('404.html.jinja', params = params), 404
+
 @app.route('/')
+@flask_login.login_required
 def default():
     params = everytime()
     print(params)
-    return render_template('index.html.jinja', params = params)
+    return render_template('dashboard.html.jinja', params = params)
 
 @app.route('/index')
-def meh():
+def index():
     params = everytime()
-    print(params)
     return render_template('index.html.jinja', params = params)
+
 
 @app.route('/charts')
 @flask_login.login_required
 def charts():
     params = everytime()
     return render_template('charts.html.jinja', params = params)
+
+@app.route('/new_device')
+@flask_login.login_required
+def newdevice():
+    params = everytime()
+    return render_template('deviceform.html.jinja', params = params)
+
+@app.route('/handle_new_device')
+@flask_login.login_required
+def handlenewdevice():
+    return redirect(url_for('ui-cards'))
+
 
 @app.route('/profileform')
 @flask_login.login_required
@@ -74,8 +93,10 @@ def uibuttons():
     return render_template('ui-buttons.html.jinja', params = params)
 
 @app.route('/ui-cards')
+@flask_login.login_required
 def uicards():
     params = everytime()
+    params.update({'devices': flask_login.current_user.devices})
     return render_template('ui-cards.html.jinja', params = params)
 
 @app.route('/ui-colors')
@@ -103,6 +124,34 @@ def uilistcomponents():
 def uitables():
     params = everytime()
     return render_template('ui-tables.html.jinja', params = params)
+
+@app.route('/new_message')
+@flask_login.login_required
+def newmessage():
+    params = everytime()
+    return render_template('ui-form-components.html.jinja', params = params)
+
+@app.route('/view_message')
+@flask_login.login_required
+def viewmessage():
+    params = everytime()
+    return render_template('ui-form-components.html.jinja', params = params)
+
+@app.route('/handle_new_message')
+@flask_login.login_required
+def handlenewmessage():
+    return redirect(url_for('uitables'))
+
+@app.route('/delete_message')
+@flask_login.login_required
+def deletemessage():
+    return redirect(url_for('uitables'))
+
+@app.route('/delete_device')
+@flask_login.login_required
+def deletedevice():
+    return redirect(url_for('uicards'))
+
 
 @app.route('/ui-typography')
 def uitypography():
@@ -135,8 +184,10 @@ def login_post():
         flask_login.login_user(user)
     session.close()
 
+    if flask_login.current_user.get_id():
+        return redirect(url_for('default'))
 
-    return redirect(url_for('meh'))
+    return redirect(url_for('index'))
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -151,4 +202,4 @@ def load_user(user_id):
 @flask_login.login_required
 def logout():
     flask_login.logout_user()
-    return redirect(url_for('meh'))
+    return redirect(url_for('index'))
