@@ -17,12 +17,12 @@ RPGSTART
 4 dashboard enkel als er in gelogd is ! (done)
 5 wat is de startpagina als je niet ingelogd bent ipv dashboard === een soort van welkomst pagina die uitlegt wat dit is en links naar andere onderdelen waar je wel bij mag als je niet bent ingelogt ! done)
 
-ORC
-1 regel de registatie form voor user en afhandeling <<
-2 regel de forgot password form en afhandeling <<
-3 Ergens heet de site nog darkboard ofzo een variable aanmaken voor de sitenaam ? <<
-4 de paginas moeten ook namen hebben zo niet aanmaken zo wel dan in router variabled gieten
-5 tabellen zo aanpassen dat je op de headers kunt klikken voor sortering !
+ORC <<
+1 regel de registatie form voor user en afhandeling (done)
+2 regel de forgot password form en afhandeling (done)
+3 Ergens heet de site nog darkboard ofzo een variable aanmaken voor de sitenaam ? en meteen een voor de pagina (done)
+4 de paginas moeten ook namen hebben zo niet aanmaken zo wel dan in router variable gieten (done)
+5 tabellen zo aanpassen dat je op de headers kunt klikken voor sortering ! <<
 
 KLONT
 1 messages nieuw plus knop ! (done)
@@ -52,4 +52,12 @@ GOBLIN
 4 internationalisatie ?
 5 heeft mij systeem base url nodig ?
 
+INFO verder nderzoek: html page include client side voor templating clientside !
+https://stackoverflow.com/questions/38837835/include-html-in-another-html-file
+https://onextrapixel.com/html5-imports-embedding-an-html-file-inside-another-html-file/
+
 1 maken van een fout login page !
+
+ELF, KOBOLT, MERMAID, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
+LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK
+CENTAURS, MINOTAUR, GNOME, DWARF, OGRE, GOLEM

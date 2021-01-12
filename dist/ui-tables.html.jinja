@@ -14,11 +14,11 @@
           <table class="mdl-data-table mdl-js-data-table">
             <thead>
               <tr>
-                <th class="mdl-data-table__cell--non-numeric">#</th>
-                <th class="mdl-data-table__cell--non-numeric">Title</th>
-                <th class="mdl-data-table__cell--non-numeric">Created</th>
-                <th class="mdl-data-table__cell--non-numeric">User</th>
-                <th class="mdl-data-table__cell--non-numeric"> </th>
+                <th class="mdl-data-table__header">#</th>
+                <th onclick="window.location.href='/ui-tables?sorts={{ params.sorts }}&index=0'" class="mdl-data-table__header--sorted-{{ params.keyss['title'] }}">Title</th>
+                <th onclick="window.location.href='/ui-tables?sorts={{ params.sorts }}&index=1'" class="mdl-data-table__header--sorted-{{ params.keyss['created'] }}">Created</th>
+                <th onclick="window.location.href='/ui-tables?sorts={{ params.sorts }}&index=2'" class="mdl-data-table__header--sorted-{{ params.keyss['user'] }}">User</th>
+                <th  class="mdl-data-table__header"> </th>
               </tr>
             </thead>
             <tbody>

@@ -6,10 +6,10 @@ name = "pypi"
 [packages]
 Flask = "*"
 Flask-Login = "*"
-sqlalchemy = "*"
+SQLAlchemy = "*"
 passlib = "*"
-sqlalchemy-utils = "*"
-faker = "*"
+SQLAlchemy-Utils = "*"
+Faker = "*"
 requests = "*"
 
 [dev-packages]

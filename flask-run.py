@@ -4,6 +4,7 @@ from flask import Blueprint, redirect, url_for, flash
 from models import User
 from dbsession import make_session
 import flask_login
+from itertools import cycle
 
 session = make_session()
 
@@ -21,6 +22,8 @@ def everytime():
 
     params = {
         'loggedin': bool(flask_login.current_user.get_id()),
+        'sitename': 'lolzor',
+        'pagename': 'defaultname'
     }
 
     # print(flask_login.current_user.get_id())
@@ -41,6 +44,7 @@ def everytime():
 @app.errorhandler(404)
 def page_not_found(e):
     params = everytime()
+    params.update({'pagename': '404'})
     # note that we set the 404 status explicitly
     return render_template('404.html.jinja', params = params), 404
 
@@ -54,28 +58,35 @@ def unauthorised(e):
 @flask_login.login_required
 def default():
     params = everytime()
-    print(params)
     return render_template('dashboard.html.jinja', params = params)
 
 @app.route('/index')
 def index():
+
     params = everytime()
+    params.update({'pagename': 'InDex'})
     return render_template('index.html.jinja', params = params)
+
+@app.route('/klonter')
+def klonter():
+    return "<b>BLAAT klotenr</b>"
 
 
 @app.route('/charts')
 @flask_login.login_required
 def charts():
     params = everytime()
+    params.update({'pagename': 'Charts'})
     return render_template('charts.html.jinja', params = params)
 
 @app.route('/new_device')
 @flask_login.login_required
 def newdevice():
     params = everytime()
+    params.update({'pagename': 'newdevice'})
     return render_template('deviceform.html.jinja', params = params)
 
-@app.route('/handle_new_device')
+@app.route('/handle_new_device', methods=['POST'])
 @flask_login.login_required
 def handlenewdevice():
     return redirect(url_for('ui-cards'))
@@ -85,59 +96,120 @@ def handlenewdevice():
 @flask_login.login_required
 def forms():
     params = everytime()
+    params.update({'pagename': 'profileform'})
     return render_template('forms.html.jinja', params = params)
 
 @app.route('/ui-buttons')
 def uibuttons():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('ui-buttons.html.jinja', params = params)
 
 @app.route('/ui-cards')
 @flask_login.login_required
 def uicards():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     params.update({'devices': flask_login.current_user.devices})
     return render_template('ui-cards.html.jinja', params = params)
 
 @app.route('/ui-colors')
 def uicolors():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('ui-colors.html.jinja', params = params)
 
 @app.route('/ui-components')
 def uicomponents():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('ui-components.html.jinja', params = params)
 
 @app.route('/ui-icons')
 def uiicons():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('ui-icons.html.jinja', params = params)
 
 @app.route('/ui-list-components')
 def uilistcomponents():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('ui-list-components.html.jinja', params = params)
+
+def rotate(l, x):
+    return l[-x:] + l[:-x]
+
+def nextitem(index, list):
+    length = len(list)
+    if index >= length:
+        return list[0]
+    return list[index]
+
 
 @app.route('/ui-tables')
 @flask_login.login_required
 def uitables():
     params = everytime()
+
+    index = int(request.args.get('index'))
+    lels = ['title', 'created' , 'user']
+    mega = request.args.get('sorts').split(',')
+
+    # print(mega[index], "000000000000000000000000000000000")
+
+    positions = ['none', 'ascending', "descending"]
+
+    possi = positions.index(mega[index])
+    # position = rotate(positions, possi)[0]
+    position = nextitem(possi + 1, positions)
+
+
+    print(position, "]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]")
+
+    mega[index] = position
+
+    dictionary = dict(zip(lels, mega))
+
+    # print(dictionary, "=--=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+
+
+    # for key, value in request.args.items():
+    #     positions = ['none', 'ascending', "descending"]
+    #     possi = positions.index(value)
+    #     positions = rotate(positions, possi)
+    #     print(positions[1], "-=-=-=-=-=-=-=-=")
+
+
+
+    # print(positions, "-----=-=-=-=-=-=", possi)
+
+    # serialized = {'title':'none', 'created':'none', 'user':'none'}
+
+    params.update({'sorts': ",".join(mega)})
+    params.update({'keyss': dictionary})
+
+    params.update({'pagename': 'Buttons'})
+
+    # print(params, "23085723895295623529847285729385729867286723095309520958203968")
+
     return render_template('ui-tables.html.jinja', params = params)
 
 @app.route('/new_message')
 @flask_login.login_required
 def newmessage():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('ui-form-components.html.jinja', params = params)
 
 @app.route('/view_message')
 @flask_login.login_required
 def viewmessage():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('ui-form-components.html.jinja', params = params)
 
-@app.route('/handle_new_message')
+@app.route('/handle_new_message', methods=['POST'])
 @flask_login.login_required
 def handlenewmessage():
     return redirect(url_for('uitables'))
@@ -156,22 +228,34 @@ def deletedevice():
 @app.route('/ui-typography')
 def uitypography():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('ui-typography.html.jinja', params = params)
 
 @app.route('/login')
 def login():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('login.html.jinja', params = params)
 
 @app.route('/sign-up')
 def signup():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('sign-up.html.jinja', params = params)
+
+@app.route('/handle-sign-up', methods=['POST'])
+def handlesignup():
+    return redirect(url_for('login'))
 
 @app.route('/forgot-password')
 def forgot():
     params = everytime()
+    params.update({'pagename': 'Buttons'})
     return render_template('forgot-password.html.jinja', params = params)
+
+@app.route('/handle-forgot-password', methods=['POST'])
+def handleforgot():
+    return redirect(url_for('login'))
 
 
 @app.route('/login', methods=['POST'])

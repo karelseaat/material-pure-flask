@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+
+
 blockquote, h1 {
   line-height: 1.35
 }
@@ -3500,7 +3502,7 @@ input.mdl-button[type=submit] {
 
 .mdl-data-table td, .mdl-data-table th {
   padding: 0 8px 12px;
-  text-align: right
+  text-align: left
 }
 
 .mdl-data-table td {
@@ -3532,7 +3534,7 @@ input.mdl-button[type=submit] {
 }
 
 .mdl-data-table th.mdl-data-table__header--sorted-ascending, .mdl-data-table th.mdl-data-table__header--sorted-descending {
-  color: rgba(0, 0, 0, .87)
+  color: rgb(255, 255, 255)
 }
 
 .mdl-data-table th.mdl-data-table__header--sorted-ascending:before, .mdl-data-table th.mdl-data-table__header--sorted-descending:before {
@@ -3558,6 +3560,10 @@ input.mdl-button[type=submit] {
 }
 
 .mdl-data-table th.mdl-data-table__header--sorted-ascending:hover, .mdl-data-table th.mdl-data-table__header--sorted-descending:hover {
+  cursor: pointer
+}
+
+.mdl-data-table th.mdl-data-table__header--sorted-none:hover {
   cursor: pointer
 }
 
@@ -7000,9 +7006,9 @@ main {
   height: 64px;
   line-height: 64px;
   background: rgba(0, 0, 0, .85);
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 500;
-  letter-spacing: 1px
+  /* letter-spacing: 1px */
 }
 
 .mdl-layout__header-row .avatar-dropdown:hover, .mdl-layout__header-row .material-icons.mdl-badge:hover, .mdl-layout__header-row .mdl-button--icon:hover {
