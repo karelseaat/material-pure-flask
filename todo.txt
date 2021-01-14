@@ -26,9 +26,9 @@ ORC <<
 
 KLONT
 1 messages nieuw plus knop ! (done)
-2 account / user profile cancel knop !
-3 hebben we voor submt en cancel geen geschiedenis nodig van waar we zijn geweest ?
-4 wat gaan we doen met de settings knop bij user dropdown, is deze nog nuttig of mag deze verwijdert worden !?
+2 account / user profile cancel knop !  (done)
+3 we hebben een url geschiedenis nodig voor de backend wellicht voor breadcrumbs maar vooral om terug te navigeren naar een plek na bv login of profile save en cancel !
+4 wat gaan we doen met de settings knop bij user dropdown, is deze nog nuttig of mag deze verwijdert worden !? (done)
 5 my account / user profile , de velden die er nodig zijn voor een user en of profile zitten er nog niet allemaal in, ff kijken wat er in kan en dat er in stoppen !
 
 NAGA
@@ -57,6 +57,8 @@ https://stackoverflow.com/questions/38837835/include-html-in-another-html-file
 https://onextrapixel.com/html5-imports-embedding-an-html-file-inside-another-html-file/
 
 1 maken van een fout login page !
+2 alle links moeten op de goede plek klikken, user profile link heeft niet de goede locatie
+3 form cancel button checken, die van usr prfile werkt nu onder te posten !
 
 ELF, KOBOLT, MERMAID, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK

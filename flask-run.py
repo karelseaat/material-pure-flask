@@ -99,6 +99,12 @@ def forms():
     params.update({'pagename': 'profileform'})
     return render_template('forms.html.jinja', params = params)
 
+@app.route('/handleprofileform', methods=['POST'])
+@flask_login.login_required
+def handleforms():
+
+    return redirect(url_for('default'))
+
 @app.route('/ui-buttons')
 def uibuttons():
     params = everytime()
@@ -155,43 +161,18 @@ def uitables():
     index = int(request.args.get('index'))
     lels = ['title', 'created' , 'user']
     mega = request.args.get('sorts').split(',')
-
-    # print(mega[index], "000000000000000000000000000000000")
-
     positions = ['none', 'ascending', "descending"]
-
     possi = positions.index(mega[index])
-    # position = rotate(positions, possi)[0]
     position = nextitem(possi + 1, positions)
-
-
-    print(position, "]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]")
-
     mega[index] = position
-
     dictionary = dict(zip(lels, mega))
 
-    # print(dictionary, "=--=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
-
-    # for key, value in request.args.items():
-    #     positions = ['none', 'ascending', "descending"]
-    #     possi = positions.index(value)
-    #     positions = rotate(positions, possi)
-    #     print(positions[1], "-=-=-=-=-=-=-=-=")
-
-
-
-    # print(positions, "-----=-=-=-=-=-=", possi)
-
-    # serialized = {'title':'none', 'created':'none', 'user':'none'}
 
     params.update({'sorts': ",".join(mega)})
     params.update({'keyss': dictionary})
-
     params.update({'pagename': 'Buttons'})
 
-    # print(params, "23085723895295623529847285729385729867286723095309520958203968")
 
     return render_template('ui-tables.html.jinja', params = params)
 
