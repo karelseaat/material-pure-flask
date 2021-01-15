@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request
+from flask import session as bsession
 from flask import Blueprint, redirect, url_for, flash
 
 from models import User
 from dbsession import make_session
 import flask_login
 from itertools import cycle
+from urllib.parse import urlparse, parse_qs
+
 
 session = make_session()
 
@@ -15,8 +18,19 @@ app = Flask(__name__,
             static_folder = "dist/static",
             template_folder = "dist")
 
+
+
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4q8z\n\xec]/'
+
+# def base_url(url, with_path=False):
+#     parsed = urllib.parse.urlparse(url)
+#     path   = '/'.join(parsed.path.split('/')[:-1]) if with_path else ''
+#     parsed = parsed._replace(path=path)
+#     parsed = parsed._replace(params='')
+#     parsed = parsed._replace(query='')
+#     parsed = parsed._replace(fragment='')
+#     return parsed.geturl()
 
 def everytime():
 
@@ -25,8 +39,17 @@ def everytime():
         'sitename': 'lolzor',
         'pagename': 'defaultname'
     }
+    parsed = urlparse(request.url, '.')
+    print(dir(parsed), "-=-=-=-=-=-=-=")
+    # print(, "==============================================")
+    if 'history' in bsession:
+        myses = bsession['history']
+        myses.append("{} {} {}".format(parsed.scheme, parsed.netloc, parsed.path))
+        bsession['history'] = myses
+    else:
+        bsession['history'] = []
 
-    # print(flask_login.current_user.get_id())
+    print(bsession['history'])
 
     if flask_login.current_user.get_id():
         params.update({
@@ -47,12 +70,12 @@ def page_not_found(e):
     params.update({'pagename': '404'})
     # note that we set the 404 status explicitly
     return render_template('404.html.jinja', params = params), 404
-
-@app.errorhandler(401)
-def unauthorised(e):
-    params = everytime()
-    # note that we set the 404 status explicitly
-    return render_template('404.html.jinja', params = params), 404
+#
+# @app.errorhandler(401)
+# def unauthorised(e):
+#     params = everytime()
+#     # note that we set the 404 status explicitly
+#     return render_template('404.html.jinja', params = params), 404
 
 @app.route('/')
 @flask_login.login_required

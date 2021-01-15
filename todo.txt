@@ -29,14 +29,14 @@ KLONT
 2 account / user profile cancel knop !  (done)
 3 we hebben een url geschiedenis nodig voor de backend wellicht voor breadcrumbs maar vooral om terug te navigeren naar een plek na bv login of profile save en cancel !
 4 wat gaan we doen met de settings knop bij user dropdown, is deze nog nuttig of mag deze verwijdert worden !? (done)
-5 my account / user profile , de velden die er nodig zijn voor een user en of profile zitten er nog niet allemaal in, ff kijken wat er in kan en dat er in stoppen !
+5 my account / user profile , de velden die er nodig zijn voor een user en of profile zitten er nog niet allemaal in, ff kijken wat er in kan en dat er in stoppen ! (done)
 
 NAGA
 1 my account / user profile mag ook die naam hebben als title !
 2 breadcrumbs ?
 3 401 pagina inrichten !
-4 material dashboard nog eens downloaden puur als voorbeeld !
-5 alle spul dat we niet nodig hebben weggooien !
+4 material dashboard nog eens downloaden puur als voorbeeld ! (done)
+5 alle spul dat we niet nodig hebben weggooien ! 
 
 TROLL
 1 alles opruimen !
@@ -59,6 +59,9 @@ https://onextrapixel.com/html5-imports-embedding-an-html-file-inside-another-htm
 1 maken van een fout login page !
 2 alle links moeten op de goede plek klikken, user profile link heeft niet de goede locatie
 3 form cancel button checken, die van usr prfile werkt nu onder te posten !
+about me toevoegen aan de user profile model !
+kijken wat andere serices in een user profil willen hebben !
+het ophalen van css en javascript trapt via 404 de runeverytime, dat moet niet !
 
 ELF, KOBOLT, MERMAID, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK

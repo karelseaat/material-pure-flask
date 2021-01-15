@@ -24,18 +24,33 @@
                                 </div>
 
                                 <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="secondName" value="{{ params.profile.sur_name }}"/>
-                                    <label class="mdl-textfield__label" for="secondName">Second name</label>
+                                    <input class="mdl-textfield__input" type="text" id="surname" value="{{ params.profile.sur_name }}"/>
+                                    <label class="mdl-textfield__label" for="surname">Sur name</label>
                                 </div>
                             </div>
 
                             <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="birthday" value="25 May, 1977"/>
-                                    <label class="mdl-textfield__label" for="birthday">Birthday</label>
+                              <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                  <input class="mdl-textfield__input" type="text" id="email" value="{{ params.profile.email }}"/>
+                                  <label class="mdl-textfield__label" for="secondName">Email</label>
+                              </div>
+
+                              <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                              <!-- Accent-colored raised button with ripple -->
+                                <Label class="mdl-button mdl-js-button ">
+                                  ADD FILE
+                                  <input type="file">
+                                  <!-- <button type="reset" onclick="window.location.href='/'" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"> -->
+                                </label>
+
                                 </div>
 
-                                <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+                                <!-- <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="birthday" value="25 May, 1977"/>
+                                    <label class="mdl-textfield__label" for="birthday">Birthday</label>
+                                </div> -->
+
+                                <!-- <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
                                     <input class="mdl-textfield__input" value="Male" type="text" id="gender" readonly tabIndex="-1"/>
 
                                     <label class="mdl-textfield__label" for="gender">Gender</label>
@@ -48,7 +63,7 @@
                                     <label for="gender">
                                         <i class="mdl-icon-toggle__label material-icons">arrow_drop_down</i>
                                     </label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 

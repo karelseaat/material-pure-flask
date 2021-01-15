@@ -11,6 +11,7 @@ passlib = "*"
 SQLAlchemy-Utils = "*"
 Faker = "*"
 requests = "*"
+flask-session = "*"
 
 [dev-packages]
 
