@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 from flask import session as bsession
 from flask import Blueprint, redirect, url_for, flash
-
 from models import User
 from dbsession import make_session
 import flask_login
@@ -19,20 +18,11 @@ app = Flask(__name__,
             template_folder = "dist")
 
 
-
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4q8z\n\xec]/'
 
-# def base_url(url, with_path=False):
-#     parsed = urllib.parse.urlparse(url)
-#     path   = '/'.join(parsed.path.split('/')[:-1]) if with_path else ''
-#     parsed = parsed._replace(path=path)
-#     parsed = parsed._replace(params='')
-#     parsed = parsed._replace(query='')
-#     parsed = parsed._replace(fragment='')
-#     return parsed.geturl()
 
-def everytime():
+def pageparameters(pagename=None):
 
     params = {
         'loggedin': bool(flask_login.current_user.get_id()),
@@ -40,19 +30,20 @@ def everytime():
         'pagename': 'defaultname'
     }
     parsed = urlparse(request.url, '.')
-    print(dir(parsed), "-=-=-=-=-=-=-=")
-    # print(, "==============================================")
     if 'history' in bsession:
         myses = bsession['history']
-        myses.append("{} {} {}".format(parsed.scheme, parsed.netloc, parsed.path))
+        baseurl = "{}://{}{}".format(parsed.scheme, parsed.netloc, parsed.path)
+        if myses[-1:][0][0] != baseurl and pagename:
+            myses.append((baseurl, pagename))
+        if len(myses) > 6:
+            myses = myses[1:]
         bsession['history'] = myses
     else:
         bsession['history'] = []
 
-    print(bsession['history'])
-
     if flask_login.current_user.get_id():
         params.update({
+            'history': bsession['history'][:-1],
             'useremail': flask_login.current_user.email,
             'userimage': flask_login.current_user.profile[0].pic_hash.decode('utf-8'),
             'username': flask_login.current_user.user_name,
@@ -60,110 +51,73 @@ def everytime():
             'messagelen': len(flask_login.current_user.messages),
             'profile': flask_login.current_user.profile[0]
         })
-
-
     return params
 
-@app.errorhandler(404)
-def page_not_found(e):
-    params = everytime()
-    params.update({'pagename': '404'})
+@app.errorhandler(401)
+def unauthorised(e):
+    params = pageparameters()
     # note that we set the 404 status explicitly
     return render_template('404.html.jinja', params = params), 404
-#
-# @app.errorhandler(401)
-# def unauthorised(e):
-#     params = everytime()
-#     # note that we set the 404 status explicitly
-#     return render_template('404.html.jinja', params = params), 404
 
-@app.route('/')
+
 @flask_login.login_required
 def default():
-    params = everytime()
+    params = pageparameters()
     return render_template('dashboard.html.jinja', params = params)
 
-@app.route('/index')
 def index():
-
-    params = everytime()
-    params.update({'pagename': 'InDex'})
+    params = pageparameters('InDex')
     return render_template('index.html.jinja', params = params)
 
-@app.route('/klonter')
-def klonter():
-    return "<b>BLAAT klotenr</b>"
-
-
-@app.route('/charts')
 @flask_login.login_required
 def charts():
-    params = everytime()
+    params = pageparameters('Charts')
     params.update({'pagename': 'Charts'})
     return render_template('charts.html.jinja', params = params)
 
-@app.route('/new_device')
 @flask_login.login_required
 def newdevice():
-    params = everytime()
+    params = pageparameters('newdevice')
     params.update({'pagename': 'newdevice'})
     return render_template('deviceform.html.jinja', params = params)
 
-@app.route('/handle_new_device', methods=['POST'])
 @flask_login.login_required
 def handlenewdevice():
     return redirect(url_for('ui-cards'))
 
-
-@app.route('/profileform')
 @flask_login.login_required
 def forms():
-    params = everytime()
-    params.update({'pagename': 'profileform'})
+    params = pageparameters('User Profile')
     return render_template('forms.html.jinja', params = params)
 
-@app.route('/handleprofileform', methods=['POST'])
 @flask_login.login_required
 def handleforms():
-
     return redirect(url_for('default'))
 
-@app.route('/ui-buttons')
 def uibuttons():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('Buttons')
     return render_template('ui-buttons.html.jinja', params = params)
 
-@app.route('/ui-cards')
 @flask_login.login_required
 def uicards():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('UI Cards')
     params.update({'devices': flask_login.current_user.devices})
     return render_template('ui-cards.html.jinja', params = params)
 
-@app.route('/ui-colors')
 def uicolors():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('UI Colors')
     return render_template('ui-colors.html.jinja', params = params)
 
-@app.route('/ui-components')
 def uicomponents():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('UI Components')
     return render_template('ui-components.html.jinja', params = params)
 
-@app.route('/ui-icons')
 def uiicons():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('UI Icons')
     return render_template('ui-icons.html.jinja', params = params)
 
-@app.route('/ui-list-components')
 def uilistcomponents():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('UI Listcomponents')
     return render_template('ui-list-components.html.jinja', params = params)
 
 def rotate(l, x):
@@ -175,98 +129,78 @@ def nextitem(index, list):
         return list[0]
     return list[index]
 
+def sortflipper(default_keys=[], default_values=[]):
+    lels = default_keys
+    positions = default_values
 
-@app.route('/ui-tables')
+    mordefault = ['none'] * len(default_values)
+
+    if 'index' in request.args and 'sorts' in request.args:
+        index = int(request.args.get('index'))
+        mega = request.args.get('sorts').split(',')
+        possi = positions.index(mega[index])
+        position = nextitem(possi + 1, positions)
+        mega[index] = position
+        dictionary = dict(zip(lels, mega))
+
+        return ",".join(mega), dictionary
+    else:
+        return ",".join(mordefault), dict(zip(lels, mordefault))
+
+
 @flask_login.login_required
 def uitables():
-    params = everytime()
-
-    index = int(request.args.get('index'))
-    lels = ['title', 'created' , 'user']
-    mega = request.args.get('sorts').split(',')
-    positions = ['none', 'ascending', "descending"]
-    possi = positions.index(mega[index])
-    position = nextitem(possi + 1, positions)
-    mega[index] = position
-    dictionary = dict(zip(lels, mega))
-
-
-
-    params.update({'sorts': ",".join(mega)})
+    params = pageparameters('UI Tables')
+    mega, dictionary = sortflipper(default_keys=['title', 'created', 'user'], default_values=['none', 'ascending','descending' ])
+    params.update({'sorts': mega})
     params.update({'keyss': dictionary})
     params.update({'pagename': 'Buttons'})
-
-
     return render_template('ui-tables.html.jinja', params = params)
 
-@app.route('/new_message')
 @flask_login.login_required
 def newmessage():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('New Message')
     return render_template('ui-form-components.html.jinja', params = params)
 
-@app.route('/view_message')
 @flask_login.login_required
 def viewmessage():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('View Message')
     return render_template('ui-form-components.html.jinja', params = params)
 
-@app.route('/handle_new_message', methods=['POST'])
 @flask_login.login_required
 def handlenewmessage():
     return redirect(url_for('uitables'))
 
-@app.route('/delete_message')
 @flask_login.login_required
 def deletemessage():
     return redirect(url_for('uitables'))
 
-@app.route('/delete_device')
 @flask_login.login_required
 def deletedevice():
     return redirect(url_for('uicards'))
 
-
-@app.route('/ui-typography')
 def uitypography():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('UI Typography')
     return render_template('ui-typography.html.jinja', params = params)
 
-@app.route('/login')
-def login():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
-    return render_template('login.html.jinja', params = params)
-
-@app.route('/sign-up')
 def signup():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('Signup')
     return render_template('sign-up.html.jinja', params = params)
 
-@app.route('/handle-sign-up', methods=['POST'])
 def handlesignup():
     return redirect(url_for('login'))
 
-@app.route('/forgot-password')
 def forgot():
-    params = everytime()
-    params.update({'pagename': 'Buttons'})
+    params = pageparameters('Forgot Password')
     return render_template('forgot-password.html.jinja', params = params)
 
 @app.route('/handle-forgot-password', methods=['POST'])
 def handleforgot():
     return redirect(url_for('login'))
 
-
-@app.route('/login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-
     user = session.query(User).filter(User.email == email).first()
     if user and user.verify_hash(password, user.password_hash):
         flask_login.login_user(user)
@@ -286,8 +220,35 @@ def load_user(user_id):
     except:
         return None
 
-@app.route("/logout")
 @flask_login.login_required
 def logout():
     flask_login.logout_user()
     return redirect(url_for('index'))
+
+
+app.add_url_rule('/', view_func=default, methods=['GET'])
+app.add_url_rule('/index', view_func=index, methods=['GET'])
+app.add_url_rule('/charts', view_func=charts, methods=['GET'])
+app.add_url_rule('/new_device', view_func=newdevice, methods=['GET'])
+app.add_url_rule('/handle_new_device', view_func=handlenewdevice, methods=['POST'])
+app.add_url_rule('/profileform', view_func=forms, methods=['GET'])
+app.add_url_rule('/handleprofileform', view_func=handleforms, methods=['POST'])
+app.add_url_rule('/ui-buttons', view_func=uibuttons, methods=['GET'])
+app.add_url_rule('/ui-cards', view_func=uicards, methods=['GET'])
+app.add_url_rule('/ui-colors', view_func=uicolors, methods=['GET'])
+app.add_url_rule('/ui-components', view_func=uicomponents, methods=['GET'])
+app.add_url_rule('/ui-icons', view_func=uiicons, methods=['GET'])
+app.add_url_rule('/ui-list-components', view_func=uilistcomponents, methods=['GET'])
+app.add_url_rule('/ui-tables', view_func=uitables, methods=['GET'])
+app.add_url_rule('/new_message', view_func=newmessage, methods=['GET'])
+app.add_url_rule('/view_message', view_func=viewmessage, methods=['GET'])
+app.add_url_rule('/handle_new_message', view_func=handlenewmessage, methods=['POST'])
+app.add_url_rule('/delete_message', view_func=deletemessage, methods=['GET'])
+app.add_url_rule('/delete_device', view_func=deletedevice, methods=['GET'])
+app.add_url_rule('/ui-typography', view_func=uitypography, methods=['GET'])
+app.add_url_rule('/login', view_func=login_post, methods=['GET'])
+app.add_url_rule('/sign-up', view_func=signup, methods=['GET'])
+app.add_url_rule('/handle-sign-up', view_func=handlesignup, methods=['POST'])
+app.add_url_rule('/forgot-password', view_func=forgot, methods=['GET'])
+app.add_url_rule('/handle-forgot-password', view_func=handleforgot, methods=['POST'])
+app.add_url_rule('/logout', view_func=logout, methods=['GET'])

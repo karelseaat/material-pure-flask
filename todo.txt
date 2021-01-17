@@ -22,7 +22,7 @@ ORC <<
 2 regel de forgot password form en afhandeling (done)
 3 Ergens heet de site nog darkboard ofzo een variable aanmaken voor de sitenaam ? en meteen een voor de pagina (done)
 4 de paginas moeten ook namen hebben zo niet aanmaken zo wel dan in router variable gieten (done)
-5 tabellen zo aanpassen dat je op de headers kunt klikken voor sortering ! <<
+5 tabellen zo aanpassen dat je op de headers kunt klikken voor sortering ! (done)
 
 KLONT
 1 messages nieuw plus knop ! (done)
@@ -32,11 +32,11 @@ KLONT
 5 my account / user profile , de velden die er nodig zijn voor een user en of profile zitten er nog niet allemaal in, ff kijken wat er in kan en dat er in stoppen ! (done)
 
 NAGA
-1 my account / user profile mag ook die naam hebben als title !
-2 breadcrumbs ?
-3 401 pagina inrichten !
+1 my account / user profile mag ook die naam hebben als title ! (done)
+2 breadcrumbs ? (done)
+3 401 pagina inrichten ! <<
 4 material dashboard nog eens downloaden puur als voorbeeld ! (done)
-5 alle spul dat we niet nodig hebben weggooien ! 
+5 alle spul dat we niet nodig hebben weggooien !
 
 TROLL
 1 alles opruimen !
@@ -62,6 +62,7 @@ https://onextrapixel.com/html5-imports-embedding-an-html-file-inside-another-htm
 about me toevoegen aan de user profile model !
 kijken wat andere serices in een user profil willen hebben !
 het ophalen van css en javascript trapt via 404 de runeverytime, dat moet niet !
+refactor history in eigen functie !
 
 ELF, KOBOLT, MERMAID, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK
