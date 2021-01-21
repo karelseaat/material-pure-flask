@@ -34,9 +34,9 @@ KLONT
 NAGA
 1 my account / user profile mag ook die naam hebben als title ! (done)
 2 breadcrumbs ? (done)
-3 401 pagina inrichten ! <<
+3 401 pagina inrichten ! (done)
 4 material dashboard nog eens downloaden puur als voorbeeld ! (done)
-5 alle spul dat we niet nodig hebben weggooien !
+5 alle spul dat we niet nodig hebben weggooien ! (done)
 
 TROLL
 1 alles opruimen !
@@ -63,6 +63,8 @@ about me toevoegen aan de user profile model !
 kijken wat andere serices in een user profil willen hebben !
 het ophalen van css en javascript trapt via 404 de runeverytime, dat moet niet !
 refactor history in eigen functie !
+maken van de go back functionalitied
+als de login niet lukt moet je niet naar de index geredirect worden !
 
 ELF, KOBOLT, MERMAID, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK

@@ -30,10 +30,11 @@ def pageparameters(pagename=None):
         'pagename': 'defaultname'
     }
     parsed = urlparse(request.url, '.')
+    print(bsession)
     if 'history' in bsession:
         myses = bsession['history']
         baseurl = "{}://{}{}".format(parsed.scheme, parsed.netloc, parsed.path)
-        if myses[-1:][0][0] != baseurl and pagename:
+        if not myses or myses[-1:][0][0] != baseurl and pagename:
             myses.append((baseurl, pagename))
         if len(myses) > 6:
             myses = myses[1:]
@@ -57,13 +58,22 @@ def pageparameters(pagename=None):
 def unauthorised(e):
     params = pageparameters()
     # note that we set the 404 status explicitly
-    return render_template('404.html.jinja', params = params), 404
+    return render_template('401.html.jinja', params = params), 404
 
+@app.errorhandler(404)
+def notfound(e):
+    params = pageparameters()
+    # note that we set the 404 status explicitly
+    return render_template('404.html.jinja', params = params), 404
 
 @flask_login.login_required
 def default():
     params = pageparameters()
     return render_template('dashboard.html.jinja', params = params)
+
+def login():
+    params = pageparameters('Login')
+    return render_template('login.html.jinja', params = params)
 
 def index():
     params = pageparameters('InDex')
@@ -246,7 +256,8 @@ app.add_url_rule('/handle_new_message', view_func=handlenewmessage, methods=['PO
 app.add_url_rule('/delete_message', view_func=deletemessage, methods=['GET'])
 app.add_url_rule('/delete_device', view_func=deletedevice, methods=['GET'])
 app.add_url_rule('/ui-typography', view_func=uitypography, methods=['GET'])
-app.add_url_rule('/login', view_func=login_post, methods=['GET'])
+app.add_url_rule('/login', view_func=login, methods=['GET'])
+app.add_url_rule('/login', view_func=login_post, methods=['POST'])
 app.add_url_rule('/sign-up', view_func=signup, methods=['GET'])
 app.add_url_rule('/handle-sign-up', view_func=handlesignup, methods=['POST'])
 app.add_url_rule('/forgot-password', view_func=forgot, methods=['GET'])

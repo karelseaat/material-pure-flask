@@ -111,7 +111,7 @@ for value in range(10):
     device.tags.append(atag1)
     device.tags.append(atag2)
     device.device_type = adevice_type
-    anode_schema = random_node_schema(Node_schema())
+    anode_schema = random_node_schema(NodeSchema())
     auser.node_schemas.append(anode_schema)
     auser.devices.append(device)
     auser.messages.append(message)

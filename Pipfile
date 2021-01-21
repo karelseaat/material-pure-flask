@@ -12,6 +12,7 @@ SQLAlchemy-Utils = "*"
 Faker = "*"
 requests = "*"
 flask-session = "*"
+pylint = "*"
 
 [dev-packages]
 
