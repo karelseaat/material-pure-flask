@@ -17,7 +17,7 @@ RPGSTART
 4 dashboard enkel als er in gelogd is ! (done)
 5 wat is de startpagina als je niet ingelogd bent ipv dashboard === een soort van welkomst pagina die uitlegt wat dit is en links naar andere onderdelen waar je wel bij mag als je niet bent ingelogt ! done)
 
-ORC <<
+ORC
 1 regel de registatie form voor user en afhandeling (done)
 2 regel de forgot password form en afhandeling (done)
 3 Ergens heet de site nog darkboard ofzo een variable aanmaken voor de sitenaam ? en meteen een voor de pagina (done)
@@ -39,11 +39,11 @@ NAGA
 5 alle spul dat we niet nodig hebben weggooien ! (done)
 
 TROLL
-1 alles opruimen !
+1 alles opruimen ! <<
 2 handle device forms
 3 handle message forms
-4 toevoegen van delete voor messages
-5 delete voor devices
+4 toevoegen van delete voor messages <<
+5 delete voor devices <<
 
 GOBLIN
 1 variablen verzinnen voor de templates die in die template logika invullen zoals: welke form moet je heen voor edit delete new, agina title, cards controller etc
@@ -65,6 +65,7 @@ het ophalen van css en javascript trapt via 404 de runeverytime, dat moet niet !
 refactor history in eigen functie !
 maken van de go back functionalitied
 als de login niet lukt moet je niet naar de index geredirect worden !
+implementeer: https://github.com/locustio/locust
 
 ELF, KOBOLT, MERMAID, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK

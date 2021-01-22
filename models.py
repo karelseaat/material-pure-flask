@@ -4,13 +4,12 @@ from sqlalchemy import Column, ForeignKey, String, TIMESTAMP, Text, Table, Boole
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from passlib.hash import pbkdf2_sha256 as sha256
-
+from sqlalchemy_utils import get_hybrid_properties
+from sqlalchemy.ext.hybrid import hybrid_property
 
 Base = declarative_base()
 metadata = Base.metadata
-# from sqlalchemy.dialects import postgresql, mysql, sqlite
-from sqlalchemy_utils import get_hybrid_properties
-from sqlalchemy.ext.hybrid import hybrid_property
+
 
 class DictSerializableMixin(Base):
     __abstract__ = True
@@ -28,8 +27,6 @@ class DictSerializableMixin(Base):
                 setattr(self, key, val)
 
 
-
-
 user_group = Table('user_group', Base.metadata,
     Column('user_id', BigInteger, ForeignKey('User.id')),
     Column('group_id', BigInteger, ForeignKey('Group.id'))
@@ -40,12 +37,12 @@ tag_all = Table('tag_all', Base.metadata,
     Column('device_id', Integer, ForeignKey('Device.id')),
     Column('node_schema_id', Integer, ForeignKey('NodeSchema.id'))
 )
-#
+
 device_node_schema = Table('device_node_schema', Base.metadata,
     Column('device_id', BigInteger, ForeignKey('Device.id')),
     Column('node_schema_id', BigInteger, ForeignKey('NodeSchema.id'))
 )
-#
+
 class User():
     pass
 
@@ -55,8 +52,6 @@ class UserSetting(DictSerializableMixin):
     id = Column(Integer, primary_key=True)
     user_id = Column(ForeignKey('User.id'), index=True)
     user = relationship('User', back_populates="setting")
-
-
 
 class NodeSchema(DictSerializableMixin):
     __tablename__ = 'Node_schema'
@@ -84,7 +79,6 @@ class UserProfile(DictSerializableMixin):
 
     def user_image(self):
         return self.pic_hash.decode('utf-8')
-
 
 class User(DictSerializableMixin):
     __tablename__ = 'User'
@@ -132,8 +126,8 @@ class DeviceType(DictSerializableMixin):
     hard_version = Column(String(100))
     device = relationship('Device', back_populates="device_type")
     # node_schema = relationship('Node_schema', back_populates="device_type")
-#
-#
+
+
 class Tag(DictSerializableMixin):
     __tablename__ = 'tag'
 
@@ -141,10 +135,8 @@ class Tag(DictSerializableMixin):
     name = Column(String(100), nullable=False)
     devices = relationship("Device", secondary=tag_all, back_populates="tags")
     node_schemas = relationship("NodeSchema", secondary=tag_all, back_populates="tags")
-#
-#
-# # from sqlalchemy.orm import column_property
-#
+
+
 class Device(DictSerializableMixin):
     __tablename__ = 'Device'
 

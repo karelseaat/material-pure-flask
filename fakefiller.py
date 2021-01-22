@@ -1,20 +1,22 @@
 #!/usr/bin/env python
-
-import sqlalchemy
-from sqlalchemy import create_engine
-from models import *
-from faker import Faker
-import os
-from dbsession import sqlitefilename
-import base64
-import requests
 import time
+import json
+import os
+import base64
+from sqlalchemy import create_engine
+import requests
+from faker import Faker
+from models import *
+from dbsession import SQLURINAME
 
-if os.path.exists(sqlitefilename):
-    os.remove(sqlitefilename)
+
+
+
+if os.path.exists(SQLURINAME):
+    os.remove(SQLURINAME)
 
 from dbsession import make_session
-import json
+
 
 def random_message(message):
     faker = Faker()
@@ -53,14 +55,14 @@ def random_device_type(device_type):
 
 def random_node_schema(node_schema):
     fake = Faker()
-    d = dict()
-    d['first_name'] = fake.first_name()
-    d['last_name'] = fake.last_name()
-    d['personal_email'] =  fake.email()
-    d['ssn'] = fake.ssn()
+    adict = dict()
+    adict['first_name'] = fake.first_name()
+    adict['last_name'] = fake.last_name()
+    adict['personal_email'] =  fake.email()
+    adict['ssn'] = fake.ssn()
     node_schema.name = fake.name().split(" ")[0]
-    node_schema.schema = json.dumps(d)
-    node_schema.location = json.dumps(d)
+    node_schema.schema = json.dumps(adict)
+    node_schema.location = json.dumps(adict)
     return node_schema
 
 def random_user(user, profile):
@@ -89,9 +91,6 @@ def random_user(user, profile):
 
 
 session = make_session()
-
-# test = session.query(User).all()
-
 
 
 f = open("usernamesandpass.txt", "w")
