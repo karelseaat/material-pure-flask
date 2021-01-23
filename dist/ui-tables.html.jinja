@@ -23,7 +23,7 @@
             </thead>
             <tbody>
               {% for message in params.messages %}
-              <tr onclick="window.location.href='/new_message'">
+              <tr onclick="window.location.href='/view_message/{{ message.id }}'">
                 <td class="mdl-data-table__cell--non-numeric">{{ message.id }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ message.title }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ message.created }}</td>

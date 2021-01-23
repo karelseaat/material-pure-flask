@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask import session as bsession
 from flask import Blueprint, redirect, url_for, flash
-from models import User
+from models import User, Device, DeviceType
 from dbsession import make_session
 import flask_login
 from itertools import cycle
@@ -30,7 +30,7 @@ def pageparameters(pagename=None):
         'pagename': 'defaultname'
     }
     parsed = urlparse(request.url, '.')
-    print(bsession)
+
     if 'history' in bsession:
         myses = bsession['history']
         baseurl = "{}://{}{}".format(parsed.scheme, parsed.netloc, parsed.path)
@@ -93,7 +93,14 @@ def newdevice():
 
 @flask_login.login_required
 def handlenewdevice():
-    return redirect(url_for('ui-cards'))
+    name = request.form.get('name')
+    id = request.form.get('id')
+    thedevice = Device(name=name)
+    thedevice.device_type = DeviceType(name="baallala")
+    session.add(thedevice)
+    session.commit()
+    session.close()
+    return redirect(url_for('charts'))
 
 @flask_login.login_required
 def forms():
@@ -113,6 +120,13 @@ def uicards():
     params = pageparameters('UI Cards')
     params.update({'devices': flask_login.current_user.devices})
     return render_template('ui-cards.html.jinja', params = params)
+
+@flask_login.login_required
+def deleteuicard(device_id=0):
+    session.query(Device).where(Device.id == device_id).first().delete()
+    session.commit()
+    session.close()
+    return redirect(url_for('uitables'))
 
 def uicolors():
     params = pageparameters('UI Colors')
@@ -173,7 +187,14 @@ def newmessage():
     return render_template('ui-form-components.html.jinja', params = params)
 
 @flask_login.login_required
-def viewmessage():
+def deletemessage(message_id=0):
+    session.query(Message).where(Device.id == message_id).delete()
+    session.commit()
+    session.close()
+    return redirect(url_for('uitables'))
+
+@flask_login.login_required
+def viewmessage(message_id=0):
     params = pageparameters('View Message')
     return render_template('ui-form-components.html.jinja', params = params)
 
@@ -181,13 +202,7 @@ def viewmessage():
 def handlenewmessage():
     return redirect(url_for('uitables'))
 
-@flask_login.login_required
-def deletemessage():
-    return redirect(url_for('uitables'))
 
-@flask_login.login_required
-def deletedevice():
-    return redirect(url_for('uicards'))
 
 def uitypography():
     params = pageparameters('UI Typography')
@@ -251,10 +266,10 @@ app.add_url_rule('/ui-icons', view_func=uiicons, methods=['GET'])
 app.add_url_rule('/ui-list-components', view_func=uilistcomponents, methods=['GET'])
 app.add_url_rule('/ui-tables', view_func=uitables, methods=['GET'])
 app.add_url_rule('/new_message', view_func=newmessage, methods=['GET'])
-app.add_url_rule('/view_message', view_func=viewmessage, methods=['GET'])
+app.add_url_rule('/view_message/<message_id>', view_func=viewmessage, methods=['GET'])
 app.add_url_rule('/handle_new_message', view_func=handlenewmessage, methods=['POST'])
-app.add_url_rule('/delete_message', view_func=deletemessage, methods=['GET'])
-app.add_url_rule('/delete_device', view_func=deletedevice, methods=['GET'])
+app.add_url_rule('/delete_message/<message_id>', view_func=deletemessage, methods=['GET'])
+app.add_url_rule('/delete_device/<device_id>', view_func=deleteuicard, methods=['GET'])
 app.add_url_rule('/ui-typography', view_func=uitypography, methods=['GET'])
 app.add_url_rule('/login', view_func=login, methods=['GET'])
 app.add_url_rule('/login', view_func=login_post, methods=['POST'])

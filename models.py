@@ -64,8 +64,8 @@ class NodeSchema(DictSerializableMixin):
     # device_type_id = Column(ForeignKey('device_type.id'), nullable=False, index=True)
     # device_type = relationship('DeviceType', back_populates="node_schema")
     user = relationship('User', back_populates="node_schemas")
-    devices = relationship("Device", secondary=device_node_schema, back_populates="node_schemas")
-    tags = relationship("Tag", secondary=tag_all, back_populates="node_schemas")
+    # devices = relationship("Device", secondary=device_node_schema, back_populates="node_schemas")
+    # tags = relationship("Tag", secondary=tag_all, back_populates="node_schemas")
 
 class UserProfile(DictSerializableMixin):
     __tablename__ = 'UserProfile'
@@ -134,7 +134,7 @@ class Tag(DictSerializableMixin):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
     devices = relationship("Device", secondary=tag_all, back_populates="tags")
-    node_schemas = relationship("NodeSchema", secondary=tag_all, back_populates="tags")
+    # node_schemas = relationship("NodeSchema", secondary=tag_all, back_populates="tags")
 
 
 class Device(DictSerializableMixin):
@@ -150,7 +150,7 @@ class Device(DictSerializableMixin):
     device_type_id = Column(ForeignKey('device_type.id'), nullable=False, index=True)
     device_type = relationship('DeviceType', back_populates="device")
     user = relationship('User', back_populates="devices")
-    node_schemas = relationship("NodeSchema", secondary=device_node_schema, back_populates="devices")
+    # node_schemas = relationship("NodeSchema", secondary=device_node_schema, back_populates="devices")
     tags = relationship("Tag", secondary=tag_all, back_populates="devices")
 
     @hybrid_property

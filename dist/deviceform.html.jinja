@@ -16,16 +16,15 @@
                         <form class="form form--basic" action="/handle_new_device" method="post">
                             <div class="mdl-grid">
                                 <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone form__article">
+                                    <input class="mdl-textfield__input" type="hidden" name="id">
                                     <div class="mdl-textfield mdl-js-textfield full-size">
-                                        <input class="mdl-textfield__input" type="text" id="name">
+                                        <input class="mdl-textfield__input" type="text" name="name" id="name">
                                         <label class="mdl-textfield__label" for="name">name</label>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield full-size">
-                                        <input class="mdl-textfield__input" type="text" id="mac">
+                                        <input class="mdl-textfield__input" type="text" name="mac" id="mac">
                                         <label class="mdl-textfield__label" for="mac">mac</label>
                                     </div>
-
-
                                 </div>
                             </div>
                         </form>
