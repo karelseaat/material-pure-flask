@@ -5,52 +5,52 @@
 {% block content %}
 
 
-        <main class="mdl-layout__content mdl-color--grey-100">
-            <div class="mdl-card mdl-shadow--2dp employer-form" action="#">
-                <div class="mdl-card__title">
-                    <h2>Form</h2>
-                    <div class="mdl-card__subtitle">Please complete the form</div>
-                </div>
+<main class="mdl-layout__content mdl-color--grey-100">
+  <div class="mdl-card mdl-shadow--2dp employer-form" action="#">
+    <div class="mdl-card__title">
+      <h2>Form</h2>
+      <div class="mdl-card__subtitle">Please complete the form</div>
+    </div>
 
-                <div class="mdl-card__supporting-text">
-                    <form action="handleprofileform" class="form" method="post">
-                        <div class="form__article">
-                            <h3>Personal data</h3>
+    <div class="mdl-card__supporting-text">
+      <form action="{{ params.submit }}" class="form" method="post">
+        <div class="form__article">
+          <h3>Personal data</h3>
 
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="firstName" value="{{ params.profile.first_name }}"/>
-                                    <label class="mdl-textfield__label" for="firstName">First name</label>
-                                </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="firstName" value="{{ params.profile.first_name }}" />
+              <label class="mdl-textfield__label" for="firstName">First name</label>
+            </div>
 
-                                <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="surname" value="{{ params.profile.sur_name }}"/>
-                                    <label class="mdl-textfield__label" for="surname">Sur name</label>
-                                </div>
-                            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="surname" value="{{ params.profile.sur_name }}" />
+              <label class="mdl-textfield__label" for="surname">Sur name</label>
+            </div>
+          </div>
 
-                            <div class="mdl-grid">
-                              <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                  <input class="mdl-textfield__input" type="text" id="email" value="{{ params.profile.email }}"/>
-                                  <label class="mdl-textfield__label" for="secondName">Email</label>
-                              </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="email" value="{{ params.profile.email }}" />
+              <label class="mdl-textfield__label" for="secondName">Email</label>
+            </div>
 
-                              <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                              <!-- Accent-colored raised button with ripple -->
-                                <Label class="mdl-button mdl-js-button ">
-                                  ADD FILE
-                                  <input type="file">
-                                  <!-- <button type="reset" onclick="window.location.href='/'" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"> -->
-                                </label>
+            <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <!-- Accent-colored raised button with ripple -->
+              <Label class="mdl-button mdl-js-button ">
+                ADD FILE
+                <input type="file">
+                <!-- <button type="reset" onclick="window.location.href='/'" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"> -->
+              </label>
 
-                                </div>
+            </div>
 
-                                <!-- <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <!-- <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     <input class="mdl-textfield__input" type="text" id="birthday" value="25 May, 1977"/>
                                     <label class="mdl-textfield__label" for="birthday">Birthday</label>
                                 </div> -->
 
-                                <!-- <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+            <!-- <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
                                     <input class="mdl-textfield__input" value="Male" type="text" id="gender" readonly tabIndex="-1"/>
 
                                     <label class="mdl-textfield__label" for="gender">Gender</label>
@@ -64,10 +64,10 @@
                                         <i class="mdl-icon-toggle__label material-icons">arrow_drop_down</i>
                                     </label>
                                 </div> -->
-                            </div>
-                        </div>
+          </div>
+        </div>
 
-                        <!-- <div class="form__article">
+        <!-- <div class="form__article">
                             <h3>Employment</h3>
 
                             <div class="mdl-grid">
@@ -118,7 +118,7 @@
                             </label>
                         </div> -->
 
-                        <!-- <div class="form__article employer-form__contacts">
+        <!-- <div class="form__article employer-form__contacts">
                             <h3>Contacts</h3>
 
                             <div class="mdl-grid">
@@ -212,27 +212,27 @@
                             </div>
                         </div> -->
 
-                        <div class="form__article employer-form__general_skills">
-                            <h3>General skills</h3>
+        <div class="form__article employer-form__general_skills">
+          <h3>General skills</h3>
 
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <textarea class="mdl-textfield__input" type="text" rows="3" id="AboutMe"></textarea>
-                                <label class="mdl-textfield__label" for="AboutMe">About me</label>
-                            </div>
-                        </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="AboutMe"></textarea>
+            <label class="mdl-textfield__label" for="AboutMe">About me</label>
+          </div>
+        </div>
 
-                        <div class="form__action">
-                            <button type="submit"  id="submit_button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                                Submit
-                            </button>
-                            <button type="reset" onclick="window.location.href='/'" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </main>
+        <div class="form__action">
+          <button type="submit" id="submit_button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            Submit
+          </button>
+          <button type="reset" onclick="window.location.href='{{ params.cancel }}'" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
 
 
 {% endblock %}

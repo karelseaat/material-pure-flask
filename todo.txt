@@ -1,78 +1,87 @@
+(DONE)
 1 opdelen van templates in onderdelen (done)
-2 inplementeren van de routes voor de andere onderdelen (done)
+2 implementeren van de routes voor de andere onderdelen (done)
 3 verwijderen van onderdelen die niet nodig zijn (done)
-4 makden van device kaart onderdeel (done)
+4 maken van device kaart onderdeel (done)
 5 wat zoeken we met zoek icoon ? (nothing for now comment out !) (done)
 
+(DONE)
 1 git it ! (done)
 2 rest van de modellen toevoegen ! (done)
 3 toevoegen van message forms (done)
 4 toevoegen van device forms (done)
 5 toevoegen van message notification link naar messages (done)
 
-RPGSTART
+RPGSTART (DONE)
 1 toevoegen van message delete ? (done)
 2 toevoegen van message edit ? (done)
-3 waarmee gaan we de dashboard vullen ? (company news, ltest updates, hoeveel verkeer je genereerd vs je limiet, je account status, je custom grafieken en of datatabellen) done)
+3 waarmee gaan we de dashboard vullen ? (company news, ltest updates, hoeveel verkeer je genereert vs je limiet, je account status, je custom grafieken en of datatabellen) done)
 4 dashboard enkel als er in gelogd is ! (done)
 5 wat is de startpagina als je niet ingelogd bent ipv dashboard === een soort van welkomst pagina die uitlegt wat dit is en links naar andere onderdelen waar je wel bij mag als je niet bent ingelogt ! done)
 
-ORC
-1 regel de registatie form voor user en afhandeling (done)
+ORC (DONE)
+1 regel de registratie form voor user en afhandeling (done)
 2 regel de forgot password form en afhandeling (done)
 3 Ergens heet de site nog darkboard ofzo een variable aanmaken voor de sitenaam ? en meteen een voor de pagina (done)
-4 de paginas moeten ook namen hebben zo niet aanmaken zo wel dan in router variable gieten (done)
+4 de pagina's moeten ook namen hebben zo niet aanmaken zo wel dan in router variable gieten (done)
 5 tabellen zo aanpassen dat je op de headers kunt klikken voor sortering ! (done)
 
-KLONT
+KLONT (DONE)
 1 messages nieuw plus knop ! (done)
 2 account / user profile cancel knop !  (done)
 3 we hebben een url geschiedenis nodig voor de backend wellicht voor breadcrumbs maar vooral om terug te navigeren naar een plek na bv login of profile save en cancel !
 4 wat gaan we doen met de settings knop bij user dropdown, is deze nog nuttig of mag deze verwijdert worden !? (done)
 5 my account / user profile , de velden die er nodig zijn voor een user en of profile zitten er nog niet allemaal in, ff kijken wat er in kan en dat er in stoppen ! (done)
 
-NAGA
+NAGA (DONE)
 1 my account / user profile mag ook die naam hebben als title ! (done)
 2 breadcrumbs ? (done)
 3 401 pagina inrichten ! (done)
 4 material dashboard nog eens downloaden puur als voorbeeld ! (done)
 5 alle spul dat we niet nodig hebben weggooien ! (done)
 
-TROLL
+TROLL (DONE)
 1 alles opruimen ! (done)
 2 handle device forms (done)
 3 handle message forms (done)
 4 toevoegen van delete voor messages (done)
 5 delete voor devices (done)
 
-GOBLIN
-1 variablen verzinnen voor de templates, die in die template logika invullen zoals: welke form moet je heen voor edit delete new, agina title, cards controller etc
-2 het menu begint groot te worden er is een soort van partial nodig om het menu in op te slaan ! samen met loggedin en nog logged in stuff naam plus route !
-3 onderzoek dit: crosser.io
-4 internationalisatie ?
-5 heeft mij systeem base url nodig ?
+GOBLIN (DONE)
+1 variabelen verzinnen voor de templates, die in die template logica invullen zoals: welke form moet je heen voor edit delete new, pagina title, cards controller etc (done)
+2 het menu begint groot te worden er is een soort van partial nodig om het menu in op te slaan ! samen met loggedin en nog logged in stuff naam plus route ! (dit lijst me nu al opgelost)(done)
+3 onderzoek dit: crosser.io (deze positioneren zich als manusje van alles iot, server controle, vol industry 4.0 bs) (done)
+4 internationalisatie ? (jah zeker maar pas in een latere fase) (done)
+5 heeft mij systeem base URL nodig ? (als we kijken in bv head.html.jinja partial dan hebben we die al in url_for) (done)
 
-INFO verder nderzoek: html page include client side voor templating clientside !
-https://stackoverflow.com/questions/38837835/include-html-in-another-html-file
-https://onextrapixel.com/html5-imports-embedding-an-html-file-inside-another-html-file/
-
+OGRE <<
 1 maken van een fout login page !
 2 alle links moeten op de goede plek klikken, user profile link heeft niet de goede locatie
-3 form cancel button checken, die van usr prfile werkt nu onder te posten !
-about me toevoegen aan de user profile model !
-kijken wat andere serices in een user profil willen hebben !
-het ophalen van css en javascript trapt via 404 de runeverytime, dat moet niet !
-refactor history in eigen functie !
-maken van de go back functionalitied
-als de login niet lukt moet je niet naar de index geredirect worden !
-implementeer: https://github.com/locustio/locust
-alles zoals uicard de juiste naam geven zoals in uicard geval device
-verwijderen van elementen die we als voorbeeld gebruiken nu we de oginele material design hebben !
-we moeten die url request parameters handiger doen, in een funcie cheken of ze er zijn etc
-form validator
-een verschil maken tussen iets nieuws en iets edit, new mesage/ edit message en dat in dezelfde functie / template !
-we gaan Webargs gebruiken voor form validatie
+3 form cancel button checken, die van usr profile werkt nu onder te posten !
+4 about me toevoegen aan de user profile model !
+5 kijken wat andere services in een user profil willen hebben !
 
-ELF, KOBOLT, MERMAID, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
+MINOTAUR <<
+1 het ophalen van CSS en java-script trapt via 404 de runeverytime, dat moet niet ! (done)
+2 refactor history in eigen functie !
+3 maken van de go back functionaliteit (done)
+4 als de login niet lukt moet je niet naar de index geredirect worden !
+5 implementeer: https://github.com/locustio/locust
+
+GOLEM
+1 alles zoals uicard de juiste naam geven zoals in uicard geval device
+2 verwijderen van elementen die we als voorbeeld gebruiken nu we de originele material design hebben !
+3 we moeten die URL request parameters handiger doen, in een functie checken of ze er zijn etc
+4 form validator
+5 een verschil maken tussen iets nieuws en iets edit, new message/ edit message en dat in dezelfde functie / template !
+
+MERMAID
+1 we gaan Webargs gebruiken voor form validatie
+2 kijken waar we meer partials kunnen maken !
+3 we doen nu params.etc nadat we de params hebben meegegeven die is inefficient
+4 maak terms of service pagina die sign up
+5 als we hier kijken https://www.muicss.com/docs/v1/email/buttons dan moeten buttons naar links worden omgezet, als dit klopt dan doen !
+
+ELF, KOBOLD, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK
-CENTAURS, MINOTAUR, GNOME, DWARF, OGRE, GOLEM
+CENTAURS, GNOME, DWARF, WHEREWOLF, DRAGON, GIANT, , YETI, CERBERUS, DRYAD

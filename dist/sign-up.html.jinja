@@ -13,7 +13,7 @@
                 <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
                     <span class="login-name text-color--white">Sign up</span>
                 </div>
-                <form class="" action="handle-sign-up" method="post">
+                <form class="" action="{{ params.submit }}" method="post">
                 <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label full-size">
                         <input class="mdl-textfield__input" type="text" id="name">
@@ -31,11 +31,11 @@
                         <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
 
                     </label>
-                    <span class="login-link">I agree all statements in <a href="#" class="underlined">terms of service</a></span>
+                    <span class="login-link">I agree all statements in <a href="{{ params.tos }}" class="underlined">terms of service</a></span>
                 </div>
               </form>
                 <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone submit-cell">
-                    <a href="login.html" class="login-link">I have already signed up</a>
+                    <a href="{{ params.already }}" class="login-link">I have already signed up</a>
                     <div class="mdl-layout-spacer"></div>
                     <a onclick="document.querySelector('form').submit();">
                         <buttons class="mdl-button mdl-js-button mdl-button--raised color--light-blue">

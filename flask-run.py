@@ -73,6 +73,7 @@ def default():
 
 def login():
     params = pageparameters('Login')
+    params.update({'submit':'login','signup':'sign-up','forgot':'forgot-password'})
     return render_template('login.html.jinja', params = params)
 
 def index():
@@ -82,13 +83,12 @@ def index():
 @flask_login.login_required
 def charts():
     params = pageparameters('Charts')
-    params.update({'pagename': 'Charts'})
     return render_template('charts.html.jinja', params = params)
 
 @flask_login.login_required
 def newdevice():
     params = pageparameters('newdevice')
-    params.update({'pagename': 'newdevice'})
+    params.update({'submit':'/handle_new_device', 'cancel':'/'})
     return render_template('deviceform.html.jinja', params = params)
 
 @flask_login.login_required
@@ -105,6 +105,7 @@ def handlenewdevice():
 @flask_login.login_required
 def forms():
     params = pageparameters('User Profile')
+    params.update({'submit':'handleprofileform', 'cancel':'/'})
     return render_template('forms.html.jinja', params = params)
 
 @flask_login.login_required
@@ -119,6 +120,7 @@ def uibuttons():
 def uicards():
     params = pageparameters('UI Cards')
     params.update({'devices': flask_login.current_user.devices})
+    params.update({'add':'new_device', 'delete':'/delete_device/', 'view':'/view_device/'})
     return render_template('ui-cards.html.jinja', params = params)
 
 @flask_login.login_required
@@ -178,12 +180,14 @@ def uitables():
     mega, dictionary = sortflipper(default_keys=['title', 'created', 'user'], default_values=['none', 'ascending','descending' ])
     params.update({'sorts': mega})
     params.update({'keyss': dictionary})
-    params.update({'pagename': 'Buttons'})
+
+    params.update({'add':'/new_message', 'view':'/view_message/'})
     return render_template('ui-tables.html.jinja', params = params)
 
 @flask_login.login_required
 def newmessage():
     params = pageparameters('New Message')
+    params.update({'submit':'/handle_new_message', 'cancel':''})
     return render_template('ui-form-components.html.jinja', params = params)
 
 @flask_login.login_required
@@ -196,13 +200,12 @@ def deletemessage(message_id=0):
 @flask_login.login_required
 def viewmessage(message_id=0):
     params = pageparameters('View Message')
+    params.update({'submit':'/handle_new_message', 'cancel':''})
     return render_template('ui-form-components.html.jinja', params = params)
 
 @flask_login.login_required
 def handlenewmessage():
     return redirect(url_for('uitables'))
-
-
 
 def uitypography():
     params = pageparameters('UI Typography')
@@ -210,6 +213,7 @@ def uitypography():
 
 def signup():
     params = pageparameters('Signup')
+    params.update({'submit':'handle-sign-up', 'already':'login', 'tos':''})
     return render_template('sign-up.html.jinja', params = params)
 
 def handlesignup():
@@ -217,6 +221,7 @@ def handlesignup():
 
 def forgot():
     params = pageparameters('Forgot Password')
+    params.update({'submit':'handle-forgot-password', 'cancel':'login'})
     return render_template('forgot-password.html.jinja', params = params)
 
 @app.route('/handle-forgot-password', methods=['POST'])

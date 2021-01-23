@@ -25,10 +25,10 @@
                         <b>Population:</b> 8.674 million (2015)
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a onclick="window.location.href='/view_device/{{ device.id }}'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-orange pull-right"target="_blank">
+                        <a onclick="window.location.href='{{ view }}{{ device.id }}'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-orange pull-right"target="_blank">
                           View
                         </a>
-                        <a onclick="window.location.href='/delete_device/{{ device.id }}'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-orange pull-left"target="_blank">
+                        <a onclick="window.location.href='{{ params.delete }}{{ device.id }}'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-orange pull-left"target="_blank">
                           Delete
                         </a>
 
@@ -41,7 +41,7 @@
             {% endfor %}
         </div>
         <div class="mdl-card__supporting-text mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone">
-          <button onclick="window.location.href='/new_device'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
+          <button onclick="window.location.href='{{ add }}'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
               <i class="material-icons">add</i>
           </button>
       </div>

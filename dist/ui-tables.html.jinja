@@ -23,7 +23,7 @@
             </thead>
             <tbody>
               {% for message in params.messages %}
-              <tr onclick="window.location.href='/view_message/{{ message.id }}'">
+              <tr onclick="window.location.href='{{ params.view }}{{ message.id }}'">
                 <td class="mdl-data-table__cell--non-numeric">{{ message.id }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ message.title }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ message.created }}</td>
@@ -41,7 +41,7 @@
 
   </div>
   <div class="mdl-card__supporting-text mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone">
-    <button onclick="window.location.href='/new_message'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
+    <button onclick="window.location.href='{{ params.new }}'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
         <i class="material-icons">add</i>
     </button>
 </div>
