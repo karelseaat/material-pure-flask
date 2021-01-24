@@ -1,0 +1,24 @@
+.snackbar_error {
+  color: #ff5252;;
+}
+
+.snackbar_warning {
+  color: #ffc107;
+}
+
+.snackbar_message {
+  color: #00d45a;
+}
+
+.snackbar_weight {
+  font-size: 18px;
+  font-weight: 450;
+
+  /* letter-spacing: .02em;
+  margin-bottom: 16px; */
+}
+
+.snackbar_container {
+  justify-content: center;
+  align-items: center;
+}

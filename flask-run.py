@@ -21,16 +21,8 @@ app = Flask(__name__,
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4q8z\n\xec]/'
 
-
-def pageparameters(pagename=None):
-
-    params = {
-        'loggedin': bool(flask_login.current_user.get_id()),
-        'sitename': 'lolzor',
-        'pagename': 'defaultname'
-    }
+def historykeep(pagename):
     parsed = urlparse(request.url, '.')
-
     if 'history' in bsession:
         myses = bsession['history']
         baseurl = "{}://{}{}".format(parsed.scheme, parsed.netloc, parsed.path)
@@ -42,9 +34,21 @@ def pageparameters(pagename=None):
     else:
         bsession['history'] = []
 
+    return bsession['history'][:-1]
+
+def pageparameters(pagename=None):
+
+    params = {
+        'loggedin': bool(flask_login.current_user.get_id()),
+        'sitename': 'lolzor',
+        'pagename': 'defaultname'
+    }
+
+    hist = historykeep(pagename)
+
     if flask_login.current_user.get_id():
         params.update({
-            'history': bsession['history'][:-1],
+            'history': hist,
             'useremail': flask_login.current_user.email,
             'userimage': flask_login.current_user.profile[0].pic_hash.decode('utf-8'),
             'username': flask_login.current_user.user_name,
@@ -73,7 +77,7 @@ def default():
 
 def login():
     params = pageparameters('Login')
-    params.update({'submit':'login','signup':'sign-up','forgot':'forgot-password'})
+    params.update({'submit':'/login','signup':'/sign-up','forgot':'/forgot-password'})
     return render_template('login.html.jinja', params = params)
 
 def index():
@@ -88,7 +92,7 @@ def charts():
 @flask_login.login_required
 def newdevice():
     params = pageparameters('newdevice')
-    params.update({'submit':'/handle_new_device', 'cancel':'/'})
+    params.update({'submit':'/handle_new_device', 'cancel':url_for('uicards')})
     return render_template('deviceform.html.jinja', params = params)
 
 @flask_login.login_required
@@ -100,12 +104,12 @@ def handlenewdevice():
     session.add(thedevice)
     session.commit()
     session.close()
-    return redirect(url_for('charts'))
+    return redirect(url_for('uicards'))
 
 @flask_login.login_required
 def forms():
     params = pageparameters('User Profile')
-    params.update({'submit':'handleprofileform', 'cancel':'/'})
+    params.update({'submit':'/handleprofileform', 'cancel':'/'})
     return render_template('forms.html.jinja', params = params)
 
 @flask_login.login_required
@@ -120,12 +124,12 @@ def uibuttons():
 def uicards():
     params = pageparameters('UI Cards')
     params.update({'devices': flask_login.current_user.devices})
-    params.update({'add':'new_device', 'delete':'/delete_device/', 'view':'/view_device/'})
+    params.update({'add':'/new_device', 'delete':'/delete_device/', 'view':'/view_device/'})
     return render_template('ui-cards.html.jinja', params = params)
 
 @flask_login.login_required
 def deleteuicard(device_id=0):
-    session.query(Device).where(Device.id == device_id).first().delete()
+    session.query(Device).filter(Device.id == device_id).delete()
     session.commit()
     session.close()
     return redirect(url_for('uitables'))
@@ -192,7 +196,7 @@ def newmessage():
 
 @flask_login.login_required
 def deletemessage(message_id=0):
-    session.query(Message).where(Device.id == message_id).delete()
+    session.query(Message).filter(Device.id == message_id).delete()
     session.commit()
     session.close()
     return redirect(url_for('uitables'))
@@ -213,7 +217,7 @@ def uitypography():
 
 def signup():
     params = pageparameters('Signup')
-    params.update({'submit':'handle-sign-up', 'already':'login', 'tos':''})
+    params.update({'submit':'/handle-sign-up', 'already':'/login', 'tos':''})
     return render_template('sign-up.html.jinja', params = params)
 
 def handlesignup():
@@ -221,7 +225,8 @@ def handlesignup():
 
 def forgot():
     params = pageparameters('Forgot Password')
-    params.update({'submit':'handle-forgot-password', 'cancel':'login'})
+    params.update({'submit':'/handle-forgot-password', 'cancel':'/login'})
+
     return render_template('forgot-password.html.jinja', params = params)
 
 @app.route('/handle-forgot-password', methods=['POST'])
@@ -231,15 +236,20 @@ def handleforgot():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
+
+    print(email, password)
+
     user = session.query(User).filter(User.email == email).first()
     if user and user.verify_hash(password, user.password_hash):
         flask_login.login_user(user)
     session.close()
 
     if flask_login.current_user.get_id():
+        flash('You were successfully logged in !')
         return redirect(url_for('default'))
 
-    return redirect(url_for('index'))
+    flash('User or password where incorrect !')
+    return redirect(url_for('forgot'))
 
 @login_manager.user_loader
 def load_user(user_id):

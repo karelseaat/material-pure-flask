@@ -13,6 +13,7 @@ Faker = "*"
 requests = "*"
 flask-session = "*"
 pylint = "*"
+locust = "*"
 
 [dev-packages]
 

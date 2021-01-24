@@ -54,19 +54,19 @@ GOBLIN (DONE)
 4 internationalisatie ? (jah zeker maar pas in een latere fase) (done)
 5 heeft mij systeem base URL nodig ? (als we kijken in bv head.html.jinja partial dan hebben we die al in url_for) (done)
 
-OGRE <<
-1 maken van een fout login page !
-2 alle links moeten op de goede plek klikken, user profile link heeft niet de goede locatie
-3 form cancel button checken, die van usr profile werkt nu onder te posten !
-4 about me toevoegen aan de user profile model !
-5 kijken wat andere services in een user profil willen hebben !
+OGRE (done)
+1 maken van een fout login page ! (done)
+2 alle links moeten op de goede plek klikken, user profile link heeft niet de goede locatie (done)
+3 form cancel button checken, die van usr profile werkt nu zonder te posten ! (done)
+4 about me toevoegen aan de user profile model ! (nope)
+5 kijken wat andere services in een user profil willen hebben ! (done)
 
 MINOTAUR <<
 1 het ophalen van CSS en java-script trapt via 404 de runeverytime, dat moet niet ! (done)
-2 refactor history in eigen functie !
+2 refactor history in eigen functie ! (done)
 3 maken van de go back functionaliteit (done)
-4 als de login niet lukt moet je niet naar de index geredirect worden !
-5 implementeer: https://github.com/locustio/locust
+4 als de login niet lukt moet je niet naar de index geredirect worden ! (done)
+5 implementeer: https://github.com/locustio/locust (done)
 
 GOLEM
 1 alles zoals uicard de juiste naam geven zoals in uicard geval device
@@ -81,6 +81,13 @@ MERMAID
 3 we doen nu params.etc nadat we de params hebben meegegeven die is inefficient
 4 maak terms of service pagina die sign up
 5 als we hier kijken https://www.muicss.com/docs/v1/email/buttons dan moeten buttons naar links worden omgezet, als dit klopt dan doen !
+
+auto form field focus !
+het sidebr menu moet in code komen zodat het snel te veranderen valt (link, text, icon, rights)
+cancel knop voor new message !
+is 'sign in' niet 'login' ?
+bij user profile de language, website, je abonnement plan (dat plan mag nog worden uitgewerkt !)
+uitzoeken en implementeren van simpele snackbar
 
 ELF, KOBOLD, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK
