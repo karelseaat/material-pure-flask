@@ -61,34 +61,47 @@ OGRE (done)
 4 about me toevoegen aan de user profile model ! (nope)
 5 kijken wat andere services in een user profil willen hebben ! (done)
 
-MINOTAUR <<
+MINOTAUR (done)
 1 het ophalen van CSS en java-script trapt via 404 de runeverytime, dat moet niet ! (done)
 2 refactor history in eigen functie ! (done)
 3 maken van de go back functionaliteit (done)
 4 als de login niet lukt moet je niet naar de index geredirect worden ! (done)
 5 implementeer: https://github.com/locustio/locust (done)
 
-GOLEM
-1 alles zoals uicard de juiste naam geven zoals in uicard geval device
-2 verwijderen van elementen die we als voorbeeld gebruiken nu we de originele material design hebben !
-3 we moeten die URL request parameters handiger doen, in een functie checken of ze er zijn etc
-4 form validator
-5 een verschil maken tussen iets nieuws en iets edit, new message/ edit message en dat in dezelfde functie / template !
+GOLEM (done)
+1 alles zoals uicard de juiste naam geven zoals in uicard geval device (done)
+2 verwijderen van elementen die we als voorbeeld gebruiken nu we de originele material design hebben ! (done)
+3 we moeten die URL request parameters handiger doen, in een functie checken of ze er zijn etc (done)
+4 form validator (we gaan Webargs gebruiken voor form validatie) (of wtf forms ?) (done)
+5 een verschil maken tussen iets nieuws en iets edit, new message/ edit message en dat in dezelfde functie / template ! (done)
 
-MERMAID
-1 we gaan Webargs gebruiken voor form validatie
-2 kijken waar we meer partials kunnen maken !
-3 we doen nu params.etc nadat we de params hebben meegegeven die is inefficient
-4 maak terms of service pagina die sign up
-5 als we hier kijken https://www.muicss.com/docs/v1/email/buttons dan moeten buttons naar links worden omgezet, als dit klopt dan doen !
+MERMAID (done)
+1 auto form field focus ! (done)
+2 kijken waar we meer partials kunnen maken ! (done) (de header kan nog verder worden onderverdeelt) (breadcrubs en user menu)
+3 we doen nu params.etc nadat we de params hebben meegegeven die is inefficient (done)
+4 maak terms of service pagina die sign up (done)
+5 als we hier kijken https://www.muicss.com/docs/v1/email/buttons dan moeten buttons naar links worden omgezet, als dit klopt dan doen ! (done)
 
-auto form field focus !
+VAMPIRE <<
 het sidebr menu moet in code komen zodat het snel te veranderen valt (link, text, icon, rights)
 cancel knop voor new message !
 is 'sign in' niet 'login' ?
 bij user profile de language, website, je abonnement plan (dat plan mag nog worden uitgewerkt !)
 uitzoeken en implementeren van simpele snackbar
 
-ELF, KOBOLD, VAMPIRE, GIANT, DRAGON, NYMPH, SATYR
+flask blueprints uitproberen !
+refactor sorter !
+uiteindelijk moeten we gebruik makn van een csrf token !
+wtform overal doorvoeren
+maken en inmplementeren van de popup snackbar etc.
+toepassen van de new form en de edit form overal
+messages bij usermenu in ?
+we gooien nu de urls die op een pagina staan mee per pagina als paramerts, is het niet handiger om dit centraal te doen ?
+geschiedenis van todo bekijken om hier nog putentn te genereren !
+.gitignore verder uitbrijden
+
+de breadcrumbs makren zoals: https://gurayyarar.github.io/AdminBSBMaterialDesign/pages/ui/breadcrumbs.html of https://materializecss.com/breadcrumbs.html
+
+ELF, KOBOLD,  GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK
 CENTAURS, GNOME, DWARF, WHEREWOLF, DRAGON, GIANT, , YETI, CERBERUS, DRYAD

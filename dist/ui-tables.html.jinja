@@ -15,15 +15,15 @@
             <thead>
               <tr>
                 <th class="mdl-data-table__header">#</th>
-                <th onclick="window.location.href='/ui-tables?sorts={{ params.sorts }}&index=0'" class="mdl-data-table__header--sorted-{{ params.keyss['title'] }}">Title</th>
-                <th onclick="window.location.href='/ui-tables?sorts={{ params.sorts }}&index=1'" class="mdl-data-table__header--sorted-{{ params.keyss['created'] }}">Created</th>
-                <th onclick="window.location.href='/ui-tables?sorts={{ params.sorts }}&index=2'" class="mdl-data-table__header--sorted-{{ params.keyss['user'] }}">User</th>
+                <th onclick="window.location.href='/message-tables/0/{{ sorts }}'" class="mdl-data-table__header--sorted-{{ keyss['title'] }}">Title</th>
+                <th onclick="window.location.href='/message-tables/1/{{ sorts }}'" class="mdl-data-table__header--sorted-{{ keyss['created'] }}">Created</th>
+                <th onclick="window.location.href='/message-tables/2/{{ sorts }}'" class="mdl-data-table__header--sorted-{{ keyss['user'] }}">User</th>
                 <th  class="mdl-data-table__header"> </th>
               </tr>
             </thead>
             <tbody>
-              {% for message in params.messages %}
-              <tr onclick="window.location.href='{{ params.view }}{{ message.id }}'">
+              {% for message in messages %}
+              <tr onclick="window.location.href='{{ view }}{{ message.id }}'">
                 <td class="mdl-data-table__cell--non-numeric">{{ message.id }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ message.title }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ message.created }}</td>
@@ -41,9 +41,9 @@
 
   </div>
   <div class="mdl-card__supporting-text mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone">
-    <button onclick="window.location.href='{{ params.new }}'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
+    <a href="{{ new }}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
         <i class="material-icons">add</i>
-    </button>
+    </a>
 </div>
 </main>
 {% endblock %}

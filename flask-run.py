@@ -6,6 +6,9 @@ from dbsession import make_session
 import flask_login
 from itertools import cycle
 from urllib.parse import urlparse, parse_qs
+from formvalidations import *
+from flaskext.markdown import Markdown
+
 
 
 session = make_session()
@@ -17,6 +20,7 @@ app = Flask(__name__,
             static_folder = "dist/static",
             template_folder = "dist")
 
+Markdown(app)
 
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4q8z\n\xec]/'
@@ -62,93 +66,100 @@ def pageparameters(pagename=None):
 def unauthorised(e):
     params = pageparameters()
     # note that we set the 404 status explicitly
-    return render_template('401.html.jinja', params = params), 404
+    return render_template('401.html.jinja', **params), 404
 
 @app.errorhandler(404)
 def notfound(e):
     params = pageparameters()
     # note that we set the 404 status explicitly
-    return render_template('404.html.jinja', params = params), 404
+    return render_template('404.html.jinja', **params), 404
 
 @flask_login.login_required
 def default():
     params = pageparameters()
-    return render_template('dashboard.html.jinja', params = params)
+    return render_template('dashboard.html.jinja', **params)
 
 def login():
     params = pageparameters('Login')
     params.update({'submit':'/login','signup':'/sign-up','forgot':'/forgot-password'})
-    return render_template('login.html.jinja', params = params)
+    return render_template('login.html.jinja', **params)
 
 def index():
     params = pageparameters('InDex')
-    return render_template('index.html.jinja', params = params)
+    return render_template('index.html.jinja', **params)
+
 
 @flask_login.login_required
-def charts():
-    params = pageparameters('Charts')
-    return render_template('charts.html.jinja', params = params)
-
-@flask_login.login_required
-def newdevice():
+def newdevice(id=0):
     params = pageparameters('newdevice')
-    params.update({'submit':'/handle_new_device', 'cancel':url_for('uicards')})
-    return render_template('deviceform.html.jinja', params = params)
+
+    if id:
+        adevice = session.query(Device).get(id)
+        session.close()
+        if adevice:
+            form = DeviceForm(obj = adevice)
+        else:
+            form = DeviceForm()
+    else:
+        form = DeviceForm()
+
+
+    params.update({'submit':'/handle_new_device', 'cancel':url_for('devices')})
+    return render_template('deviceform.html.jinja', **params, form = form)
 
 @flask_login.login_required
 def handlenewdevice():
-    name = request.form.get('name')
-    id = request.form.get('id')
-    thedevice = Device(name=name)
-    thedevice.device_type = DeviceType(name="baallala")
+    form = DeviceForm(request.form)
+    if form.validate():
+        print(form.mac.data)
+        print(form.name.data)
+    else:
+        print(form.data)
+        print(dir(form), form.errors)
+
+    if form.id.data == 0:
+        thedevice = Device(name=form.name.data)
+        thedevice.device_type = DeviceType(name="baallala")
+    else:
+        thedevice = session.query(Device).get(form.id.data)
+        thedevice.name = form.name.data
+        thedevice.mac = form.mac.data
+
     session.add(thedevice)
+
+
+    # name = request.form.get('name')
+    # id = request.form.get('id')
+
     session.commit()
     session.close()
-    return redirect(url_for('uicards'))
+    return redirect(url_for('devices'))
 
 @flask_login.login_required
 def forms():
     params = pageparameters('User Profile')
     params.update({'submit':'/handleprofileform', 'cancel':'/'})
-    return render_template('forms.html.jinja', params = params)
+    return render_template('forms.html.jinja', **params)
 
 @flask_login.login_required
 def handleforms():
     return redirect(url_for('default'))
 
-def uibuttons():
-    params = pageparameters('Buttons')
-    return render_template('ui-buttons.html.jinja', params = params)
 
 @flask_login.login_required
-def uicards():
+def devices():
     params = pageparameters('UI Cards')
     params.update({'devices': flask_login.current_user.devices})
     params.update({'add':'/new_device', 'delete':'/delete_device/', 'view':'/view_device/'})
-    return render_template('ui-cards.html.jinja', params = params)
+    return render_template('ui-cards.html.jinja', **params)
 
 @flask_login.login_required
 def deleteuicard(device_id=0):
     session.query(Device).filter(Device.id == device_id).delete()
     session.commit()
     session.close()
-    return redirect(url_for('uitables'))
+    return redirect(url_for('messagetable'))
 
-def uicolors():
-    params = pageparameters('UI Colors')
-    return render_template('ui-colors.html.jinja', params = params)
-
-def uicomponents():
-    params = pageparameters('UI Components')
-    return render_template('ui-components.html.jinja', params = params)
-
-def uiicons():
-    params = pageparameters('UI Icons')
-    return render_template('ui-icons.html.jinja', params = params)
-
-def uilistcomponents():
-    params = pageparameters('UI Listcomponents')
-    return render_template('ui-list-components.html.jinja', params = params)
 
 def rotate(l, x):
     return l[-x:] + l[:-x]
@@ -159,66 +170,64 @@ def nextitem(index, list):
         return list[0]
     return list[index]
 
-def sortflipper(default_keys=[], default_values=[]):
+def sortflipper(index, sorts, default_keys=[], default_values=[]):
     lels = default_keys
     positions = default_values
+    index = int(index)
+    sorts = sorts.split(',')
 
     mordefault = ['none'] * len(default_values)
-
-    if 'index' in request.args and 'sorts' in request.args:
-        index = int(request.args.get('index'))
-        mega = request.args.get('sorts').split(',')
-        possi = positions.index(mega[index])
+    if index > -1 and sorts:
+        possi = positions.index(sorts[index])
         position = nextitem(possi + 1, positions)
-        mega[index] = position
-        dictionary = dict(zip(lels, mega))
-
-        return ",".join(mega), dictionary
+        sorts[index] = position
+        dictionary = dict(zip(lels, sorts))
+        return ",".join(sorts), dictionary
     else:
         return ",".join(mordefault), dict(zip(lels, mordefault))
 
 
 @flask_login.login_required
-def uitables():
+def messagetable(index="-1", sorts=""):
     params = pageparameters('UI Tables')
-    mega, dictionary = sortflipper(default_keys=['title', 'created', 'user'], default_values=['none', 'ascending','descending' ])
+    mega, dictionary = sortflipper(index, sorts,default_keys=['title', 'created', 'user'], default_values=['none', 'ascending','descending' ])
     params.update({'sorts': mega})
     params.update({'keyss': dictionary})
 
     params.update({'add':'/new_message', 'view':'/view_message/'})
-    return render_template('ui-tables.html.jinja', params = params)
+    return render_template('ui-tables.html.jinja',  **params)
 
 @flask_login.login_required
 def newmessage():
     params = pageparameters('New Message')
     params.update({'submit':'/handle_new_message', 'cancel':''})
-    return render_template('ui-form-components.html.jinja', params = params)
+    return render_template('ui-form-components.html.jinja', **params)
+
+def termsofservice():
+    params = pageparameters('Terms of service')
+    return render_template('tos.html.jinja', **params)
 
 @flask_login.login_required
 def deletemessage(message_id=0):
     session.query(Message).filter(Device.id == message_id).delete()
     session.commit()
     session.close()
-    return redirect(url_for('uitables'))
+    return redirect(url_for('messagetable'))
 
 @flask_login.login_required
 def viewmessage(message_id=0):
     params = pageparameters('View Message')
     params.update({'submit':'/handle_new_message', 'cancel':''})
-    return render_template('ui-form-components.html.jinja', params = params)
+    return render_template('ui-form-components.html.jinja', **params)
 
 @flask_login.login_required
 def handlenewmessage():
-    return redirect(url_for('uitables'))
-
-def uitypography():
-    params = pageparameters('UI Typography')
-    return render_template('ui-typography.html.jinja', params = params)
+    return redirect(url_for('messagetable'))
 
 def signup():
     params = pageparameters('Signup')
     params.update({'submit':'/handle-sign-up', 'already':'/login', 'tos':''})
-    return render_template('sign-up.html.jinja', params = params)
+    return render_template('sign-up.html.jinja', **params)
 
 def handlesignup():
     return redirect(url_for('login'))
@@ -227,7 +236,7 @@ def forgot():
     params = pageparameters('Forgot Password')
     params.update({'submit':'/handle-forgot-password', 'cancel':'/login'})
 
-    return render_template('forgot-password.html.jinja', params = params)
+    return render_template('forgot-password.html.jinja', **params)
 
 @app.route('/handle-forgot-password', methods=['POST'])
 def handleforgot():
@@ -236,8 +245,6 @@ def handleforgot():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-
-    print(email, password)
 
     user = session.query(User).filter(User.email == email).first()
     if user and user.verify_hash(password, user.password_hash):
@@ -268,24 +275,20 @@ def logout():
 
 app.add_url_rule('/', view_func=default, methods=['GET'])
 app.add_url_rule('/index', view_func=index, methods=['GET'])
-app.add_url_rule('/charts', view_func=charts, methods=['GET'])
 app.add_url_rule('/new_device', view_func=newdevice, methods=['GET'])
+app.add_url_rule('/new_device/<id>', view_func=newdevice, methods=['GET'])
 app.add_url_rule('/handle_new_device', view_func=handlenewdevice, methods=['POST'])
 app.add_url_rule('/profileform', view_func=forms, methods=['GET'])
 app.add_url_rule('/handleprofileform', view_func=handleforms, methods=['POST'])
-app.add_url_rule('/ui-buttons', view_func=uibuttons, methods=['GET'])
-app.add_url_rule('/ui-cards', view_func=uicards, methods=['GET'])
-app.add_url_rule('/ui-colors', view_func=uicolors, methods=['GET'])
-app.add_url_rule('/ui-components', view_func=uicomponents, methods=['GET'])
-app.add_url_rule('/ui-icons', view_func=uiicons, methods=['GET'])
-app.add_url_rule('/ui-list-components', view_func=uilistcomponents, methods=['GET'])
-app.add_url_rule('/ui-tables', view_func=uitables, methods=['GET'])
+app.add_url_rule('/device-cards', view_func=devices, methods=['GET'])
+app.add_url_rule('/tos', view_func=termsofservice, methods=['GET'])
+app.add_url_rule('/message-tables/<index>/<sorts>', view_func=messagetable, methods=['GET'])
+app.add_url_rule('/message-tables', view_func=messagetable, methods=['GET'])
 app.add_url_rule('/new_message', view_func=newmessage, methods=['GET'])
 app.add_url_rule('/view_message/<message_id>', view_func=viewmessage, methods=['GET'])
 app.add_url_rule('/handle_new_message', view_func=handlenewmessage, methods=['POST'])
 app.add_url_rule('/delete_message/<message_id>', view_func=deletemessage, methods=['GET'])
 app.add_url_rule('/delete_device/<device_id>', view_func=deleteuicard, methods=['GET'])
-app.add_url_rule('/ui-typography', view_func=uitypography, methods=['GET'])
 app.add_url_rule('/login', view_func=login, methods=['GET'])
 app.add_url_rule('/login', view_func=login_post, methods=['POST'])
 app.add_url_rule('/sign-up', view_func=signup, methods=['GET'])

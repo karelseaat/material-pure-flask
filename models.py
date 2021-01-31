@@ -31,17 +31,17 @@ user_group = Table('user_group', Base.metadata,
     Column('user_id', BigInteger, ForeignKey('User.id')),
     Column('group_id', BigInteger, ForeignKey('Group.id'))
 )
-#
+
 tag_all = Table('tag_all', Base.metadata,
     Column('tag_id', Integer, ForeignKey('tag.id')),
     Column('device_id', Integer, ForeignKey('Device.id')),
-    Column('node_schema_id', Integer, ForeignKey('NodeSchema.id'))
+    # Column('node_schema_id', Integer, ForeignKey('NodeSchema.id'))
 )
 
-device_node_schema = Table('device_node_schema', Base.metadata,
-    Column('device_id', BigInteger, ForeignKey('Device.id')),
-    Column('node_schema_id', BigInteger, ForeignKey('NodeSchema.id'))
-)
+# device_node_schema = Table('device_node_schema', Base.metadata,
+#     Column('device_id', BigInteger, ForeignKey('Device.id')),
+#     Column('node_schema_id', BigInteger, ForeignKey('NodeSchema.id'))
+# )
 
 class User():
     pass

@@ -9,7 +9,7 @@
                 <h3>Basic cards</h3>
             </div>
 
-            {% for device in params.devices %}
+            {% for device in devices %}
             <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone">
                 <div class="mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title">
@@ -25,10 +25,10 @@
                         <b>Population:</b> 8.674 million (2015)
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a onclick="window.location.href='{{ view }}{{ device.id }}'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-orange pull-right"target="_blank">
+                        <a href="{{ view }}{{ device.id }}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-orange pull-right" target="_blank">
                           View
                         </a>
-                        <a onclick="window.location.href='{{ params.delete }}{{ device.id }}'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-orange pull-left"target="_blank">
+                        <a href="{{ delete }}{{ device.id }}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-orange pull-left" target="_blank">
                           Delete
                         </a>
 
@@ -41,9 +41,11 @@
             {% endfor %}
         </div>
         <div class="mdl-card__supporting-text mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone">
-          <button onclick="window.location.href='{{ params.add }}'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
-              <i class="material-icons">add</i>
-          </button>
+
+          <a href='{{ add }}'  class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored pull-left">
+            <i class="material-icons">add</i>
+          </a>
+
       </div>
     </main>
     {% endblock %}

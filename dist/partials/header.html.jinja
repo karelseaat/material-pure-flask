@@ -1,5 +1,5 @@
 <header class="mdl-layout__header">
-{% if params.loggedin == True %}
+{% if loggedin == True %}
   <div class="mdl-layout__header-row">
     <div class="mdl-layout-spacer"></div>
     <!-- Search-->
@@ -8,8 +8,8 @@
         <i class="material-icons">search</i>
       </label> -->
         <div class="pull-left mdl-badge mdl-badge--overlap">
-      <!-- <p>{{ params.history }}</p> -->
-      {% for hist in params.history %}
+      <!-- <p>{{ history }}</p> -->
+      {% for hist in history %}
       {% if not loop.first %}
         > <a href="{{ hist[0] }}">{{ hist[1] }}</a>
       {% else %}
@@ -24,16 +24,16 @@
       </div>
     </div>
 
-    <div class="material-icons mdl-badge mdl-badge--overlap mdl-button--icon message" id="inbox" data-badge="{{ params.messagelen }}">
+    <div class="material-icons mdl-badge mdl-badge--overlap mdl-button--icon message" id="inbox" data-badge="{{ messagelen }}">
       mail_outline
     </div>
     <!-- Messages dropdown-->
     <ul class="mdl-menu mdl-list mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right mdl-shadow--2dp messages-dropdown" for="inbox">
       <li class="mdl-list__item">
-        {{ params.messagelen }}
+        {{ messagelen }}
       </li>
 
-      {% for message in params.messages %}
+      {% for message in messages %}
       <li onclick="window.location.href='/new_device'" class="mdl-menu__item mdl-list__item mdl-list__item--two-line list__item--border-top">
         <span class="mdl-list__item-primary-content">
           <span class="mdl-list__item-avatar background-color--mint">
@@ -51,17 +51,17 @@
     </ul>
 
     <div class="avatar-dropdown" id="icon">
-      <span>{{ params.username }}</span>
-      <img src="data:image/jpeg;base64, {{ params.profile.user_image() }}" />
+      <span>{{ username }}</span>
+      <img src="data:image/jpeg;base64, {{ profile.user_image() }}" />
     </div>
     <!-- Account dropdawn-->
     <ul class="mdl-menu mdl-list mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect mdl-shadow--2dp account-dropdown" for="icon">
       <li class="mdl-list__item mdl-list__item--two-line">
         <span class="mdl-list__item-primary-content">
           <!-- <span class="material-icons mdl-list__item-avatar"></span> -->
-          <img src="data:image/jpeg;base64, {{ params.profile.user_image() }}" />
-          <span>{{ params.username }}</span>
-          <span class="mdl-list__item-sub-title">{{ params.useremail }}</span>
+          <img src="data:image/jpeg;base64, {{ profile.user_image() }}" />
+          <span>{{ username }}</span>
+          <span class="mdl-list__item-sub-title">{{ useremail }}</span>
         </span>
       </li>
       <li class="list__item--border-top"></li>

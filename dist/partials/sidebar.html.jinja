@@ -1,10 +1,10 @@
 <div class="mdl-layout__drawer">
-  <header>{{ params.sitename }}, {{ params.pagename }}</header>
+  <header>{{ sitename }}, {{ pagename }}</header>
   <div class="scroll__wrapper" id="scroll__wrapper">
     <div class="scroller" id="scroller">
       <div class="scroll__container" id="scroll__container">
         <nav class="mdl-navigation">
-          {% if params.loggedin == True %}
+          {% if loggedin == True %}
           <a class="mdl-navigation__link mdl-navigation__link--current" href="/">
             <i class="material-icons" role="presentation">dashboard</i>
             Dashboard
@@ -17,34 +17,34 @@
               <i class="material-icons">keyboard_arrow_down</i>
             </a>
             <div class="mdl-navigation">
-              <a class="mdl-navigation__link" href="/ui-buttons">
+              <!-- <a class="mdl-navigation__link" href="/ui-buttons">
                 Buttons
+              </a> -->
+              <a class="mdl-navigation__link" href="/device-cards">
+                Devices
               </a>
-              <a class="mdl-navigation__link" href="/ui-cards">
-                Cards
-              </a>
-              <a class="mdl-navigation__link" href="/ui-colors">
+              <!-- <a class="mdl-navigation__link" href="/ui-colors">
                 Colors
-              </a>
-              <a class="mdl-navigation__link" href="/ui-icons">
+              </a> -->
+              <!-- <a class="mdl-navigation__link" href="/ui-icons">
                 Icons
               </a>
               <a class="mdl-navigation__link" href="/ui-typography">
                 Typography
-              </a>
-              <a class="mdl-navigation__link" href="/ui-tables">
-                Tables
+              </a> -->
+              <a class="mdl-navigation__link" href="/message-tables">
+                MessageTable
               </a>
             </div>
           </div>
-          {% if params.loggedin == True %}
-          <a class="mdl-navigation__link" href="/ui-components">
+          {% if loggedin == True %}
+          <!-- <a class="mdl-navigation__link" href="/ui-components">
             <i class="material-icons">developer_board</i>
             Components
-          </a>
+          </a> -->
             {% endif %}
 
-            {% if params.loggedin == False %}
+            {% if loggedin == False %}
             <a class="mdl-navigation__link" href="/login">
               <i class="material-icons">multiline_chart</i>
               Sign in
@@ -58,11 +58,11 @@
             <i class="material-icons" role="presentation">map</i>
             Maps
           </a> #}
-          {% if params.loggedin == True %}
-          <a class="mdl-navigation__link" href="/charts">
+          {% if loggedin == True %}
+          <!-- <a class="mdl-navigation__link" href="/charts">
             <i class="material-icons">multiline_chart</i>
             Charts
-          </a>
+          </a> -->
             {% endif %}
             <a class="mdl-navigation__link" href="index">
               <i class="material-icons">multiline_chart</i>
