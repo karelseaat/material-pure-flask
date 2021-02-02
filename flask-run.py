@@ -42,11 +42,21 @@ def historykeep(pagename):
 
 def pageparameters(pagename=None):
 
+    themenu = [
+        ('/', 'UI', 'view_comfy', True ),
+        ('/device-cards', 'Devices', 'view_comfy', True),
+        ('/message-tables', 'MessageTable', 'view_comfy', True),
+        ('/login', 'Login', 'multiline_chart', False),
+        ('index', 'Index', 'multiline_chart', False)
+    ]
+
     params = {
         'loggedin': bool(flask_login.current_user.get_id()),
         'sitename': 'lolzor',
         'pagename': 'defaultname'
     }
+
+    params.update({'menu': themenu})
 
     hist = historykeep(pagename)
 
@@ -194,7 +204,7 @@ def messagetable(index="-1", sorts=""):
     params.update({'sorts': mega})
     params.update({'keyss': dictionary})
 
-    params.update({'add':'/new_message', 'view':'/view_message/'})
+    params.update({'new':'/new_message', 'view':'/view_message/', 'cancel': '/message-tables'})
     return render_template('ui-tables.html.jinja',  **params)
 
 @flask_login.login_required

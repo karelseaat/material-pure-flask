@@ -83,25 +83,32 @@ MERMAID (done)
 5 als we hier kijken https://www.muicss.com/docs/v1/email/buttons dan moeten buttons naar links worden omgezet, als dit klopt dan doen ! (done)
 
 VAMPIRE <<
-het sidebr menu moet in code komen zodat het snel te veranderen valt (link, text, icon, rights)
-cancel knop voor new message !
-is 'sign in' niet 'login' ?
+het sidebr menu moet in code komen zodat het snel te veranderen valt (link, text, icon, rights) (done)
+cancel knop voor new message ! (done)
+is 'sign in' niet 'login' ? (done)
 bij user profile de language, website, je abonnement plan (dat plan mag nog worden uitgewerkt !)
 uitzoeken en implementeren van simpele snackbar
 
+KOBOLD
 flask blueprints uitproberen !
 refactor sorter !
-uiteindelijk moeten we gebruik makn van een csrf token !
+uiteindelijk moeten we gebruik maken van een csrf token !
 wtform overal doorvoeren
 maken en inmplementeren van de popup snackbar etc.
+
+HYDRA
 toepassen van de new form en de edit form overal
 messages bij usermenu in ?
 we gooien nu de urls die op een pagina staan mee per pagina als paramerts, is het niet handiger om dit centraal te doen ?
 geschiedenis van todo bekijken om hier nog putentn te genereren !
 .gitignore verder uitbrijden
 
+GIANT
+staat de scripts partial wel op de goede plek ?, alsin shit laad traag fix dit
+bericht verstuur knop laten verwijzen naar juiste ding !
+darkboard verwijzingen opzoeken en vervangen met vari
 de breadcrumbs makren zoals: https://gurayyarar.github.io/AdminBSBMaterialDesign/pages/ui/breadcrumbs.html of https://materializecss.com/breadcrumbs.html
 
-ELF, KOBOLD,  GIANT, DRAGON, NYMPH, SATYR
-LEPRECHAUN, SPHINX, HYDRA, CHIMERA, UNICORN, BASILISK
-CENTAURS, GNOME, DWARF, WHEREWOLF, DRAGON, GIANT, , YETI, CERBERUS, DRYAD
+ELF, ,  GIANT, DRAGON, NYMPH, SATYR
+LEPRECHAUN, SPHINX, , CHIMERA, UNICORN, BASILISK
+CENTAURS, GNOME, DWARF, WHEREWOLF, DRAGON, , , YETI, CERBERUS, DRYAD

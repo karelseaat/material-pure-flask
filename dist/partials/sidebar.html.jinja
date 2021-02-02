@@ -4,91 +4,16 @@
     <div class="scroller" id="scroller">
       <div class="scroll__container" id="scroll__container">
         <nav class="mdl-navigation">
-          {% if loggedin == True %}
-          <a class="mdl-navigation__link mdl-navigation__link--current" href="/">
-            <i class="material-icons" role="presentation">dashboard</i>
-            Dashboard
-          </a>
-          {% endif %}
-          <div class="sub-navigation">
-            <a class="mdl-navigation__link">
-              <i class="material-icons">view_comfy</i>
-              UI
-              <i class="material-icons">keyboard_arrow_down</i>
-            </a>
-            <div class="mdl-navigation">
-              <!-- <a class="mdl-navigation__link" href="/ui-buttons">
-                Buttons
-              </a> -->
-              <a class="mdl-navigation__link" href="/device-cards">
-                Devices
-              </a>
-              <!-- <a class="mdl-navigation__link" href="/ui-colors">
-                Colors
-              </a> -->
-              <!-- <a class="mdl-navigation__link" href="/ui-icons">
-                Icons
-              </a>
-              <a class="mdl-navigation__link" href="/ui-typography">
-                Typography
-              </a> -->
-              <a class="mdl-navigation__link" href="/message-tables">
-                MessageTable
-              </a>
-            </div>
-          </div>
-          {% if loggedin == True %}
-          <!-- <a class="mdl-navigation__link" href="/ui-components">
-            <i class="material-icons">developer_board</i>
-            Components
-          </a> -->
-            {% endif %}
+                {% for men in menu %}
+                {% if loggedin == men[3] %}
+                <a  href="{{ men[0] }}" class="mdl-navigation__link">
+                  <i class="material-icons">{{ men[2] }}</i>
+                  {{men[1]}}
+                </a>
+                {% endif %}
+                {% endfor %}
 
-            {% if loggedin == False %}
-            <a class="mdl-navigation__link" href="/login">
-              <i class="material-icons">multiline_chart</i>
-              Sign in
-            </a>
-              {% endif %}
-          {# <a class="mdl-navigation__link" href="forms.html">
-            <i class="material-icons" role="presentation">person</i>
-            Account
-          </a> #}
-          {# <a class="mdl-navigation__link" href="maps.html">
-            <i class="material-icons" role="presentation">map</i>
-            Maps
-          </a> #}
-          {% if loggedin == True %}
-          <!-- <a class="mdl-navigation__link" href="/charts">
-            <i class="material-icons">multiline_chart</i>
-            Charts
-          </a> -->
-            {% endif %}
-            <a class="mdl-navigation__link" href="index">
-              <i class="material-icons">multiline_chart</i>
-              Index
-            </a>
-          <!-- <div class="sub-navigation">
-            <a class="mdl-navigation__link">
-              <i class="material-icons">pages</i>
-              Pages
-              <i class="material-icons">keyboard_arrow_down</i>
-            </a>
-            <div class="mdl-navigation">
-              <a class="mdl-navigation__link" href="login">
-                Sign in
-              </a>
-              <a class="mdl-navigation__link" href="sign-up">
-                Sign up
-              </a>
-              <a class="mdl-navigation__link" href="forgot-password">
-                Forgot password
-              </a>
-              <a class="mdl-navigation__link" href="404.html">
-                404
-              </a>
-            </div>
-          </div> -->
+
           <div class="mdl-layout-spacer"></div>
           <!-- <hr>
           <a class="mdl-navigation__link" href="https://github.com/CreativeIT/getmdl-dashboard">
