@@ -87,7 +87,7 @@ het sidebr menu moet in code komen zodat het snel te veranderen valt (link, text
 cancel knop voor new message ! (done)
 is 'sign in' niet 'login' ? (done)
 bij user profile de language, website, je abonnement plan (dat plan mag nog worden uitgewerkt !)
-uitzoeken en implementeren van simpele snackbar
+uitzoeken en implementeren van simpele snackbar (done)
 
 KOBOLD
 flask blueprints uitproberen !

@@ -1,9 +1,14 @@
 (function() {
   'use strict';
   var snackbarContainer = document.querySelector('#demo-toast-example');
+  if (snackbarContainer) {
   window.addEventListener('load', function() {
     'use strict';
     var data = {message: snackbarContainer.childNodes[1].innerHTML, timeout: 3000,};
-    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    if (snackbarContainer.childNodes[1].innerHTML !== "")
+    {
+      snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    }
   });
+}
 }());

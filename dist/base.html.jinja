@@ -17,10 +17,23 @@
     {% endblock %}
     {% block content %}{% endblock %}
   </div>
+  <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar snackbar_container">
+    {% for flashmesg in flashmessages %}
+    <div class="mdl-snackbar__text snackbar_warning snackbar_weight">{{ flashmesg }}</div>
+    {% endfor %}
+    <div class="mdl-snackbar__text snackbar_weight"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
   {% block scripts %}
   {% include "./partials/scripts.html.jinja" %}
   {% endblock %}
+
+
+
+
 </body>
+
+
 
 <!-- <object data="klonter"> -->
 

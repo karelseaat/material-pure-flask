@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from flask import session as bsession
-from flask import Blueprint, redirect, url_for, flash
+from flask import Blueprint, redirect, url_for, flash, get_flashed_messages
 from models import User, Device, DeviceType
 from dbsession import make_session
 import flask_login
@@ -56,7 +56,7 @@ def pageparameters(pagename=None):
         'pagename': 'defaultname'
     }
 
-    params.update({'menu': themenu})
+    params.update({'menu': themenu, 'flashmessages': get_flashed_messages()})
 
     hist = historykeep(pagename)
 
