@@ -82,18 +82,18 @@ MERMAID (done)
 4 maak terms of service pagina die sign up (done)
 5 als we hier kijken https://www.muicss.com/docs/v1/email/buttons dan moeten buttons naar links worden omgezet, als dit klopt dan doen ! (done)
 
-VAMPIRE <<
+VAMPIRE (done)
 het sidebr menu moet in code komen zodat het snel te veranderen valt (link, text, icon, rights) (done)
 cancel knop voor new message ! (done)
 is 'sign in' niet 'login' ? (done)
-bij user profile de language, website, je abonnement plan (dat plan mag nog worden uitgewerkt !)
+bij user profile de language, website, je abonnement plan (dat plan mag nog worden uitgewerkt !) (done)
 uitzoeken en implementeren van simpele snackbar (done)
 
-KOBOLD
+KOBOLD <<
 flask blueprints uitproberen !
 refactor sorter !
-uiteindelijk moeten we gebruik maken van een csrf token !
-wtform overal doorvoeren
+uiteindelijk moeten we gebruik maken van een csrf token ! (wtf forms heeft dit er al in zitten !) https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/
+wtform overal doorvoeren https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/
 maken en inmplementeren van de popup snackbar etc.
 
 HYDRA
@@ -108,6 +108,9 @@ staat de scripts partial wel op de goede plek ?, alsin shit laad traag fix dit
 bericht verstuur knop laten verwijzen naar juiste ding !
 darkboard verwijzingen opzoeken en vervangen met vari
 de breadcrumbs makren zoals: https://gurayyarar.github.io/AdminBSBMaterialDesign/pages/ui/breadcrumbs.html of https://materializecss.com/breadcrumbs.html
+
+abbonementsplannen !
+toevoegen van abbonements plannen in de db models, plus internationalisation landen, website !, toevoegen bij form
 
 ELF, ,  GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, , CHIMERA, UNICORN, BASILISK
