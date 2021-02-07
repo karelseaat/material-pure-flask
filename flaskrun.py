@@ -2,14 +2,17 @@ from flask import Flask, render_template, request
 from flask import session as bsession
 from flask import Blueprint, redirect, url_for, flash, get_flashed_messages
 from models import User, Device, DeviceType
+from helpers import pageparameters, historykeep
 from dbsession import make_session
 import flask_login
 from itertools import cycle
-from urllib.parse import urlparse, parse_qs
+
 from formvalidations import *
 from flaskext.markdown import Markdown
 
-
+from blueprints.auth import auth
+from flask_wtf.csrf import CSRFProtect
+from formvalidations import LoginForm
 
 session = make_session()
 
@@ -22,55 +25,23 @@ app = Flask(__name__,
 
 Markdown(app)
 
+
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4q8z\n\xec]/'
 
-def historykeep(pagename):
-    parsed = urlparse(request.url, '.')
-    if 'history' in bsession:
-        myses = bsession['history']
-        baseurl = "{}://{}{}".format(parsed.scheme, parsed.netloc, parsed.path)
-        if not myses or myses[-1:][0][0] != baseurl and pagename:
-            myses.append((baseurl, pagename))
-        if len(myses) > 6:
-            myses = myses[1:]
-        bsession['history'] = myses
-    else:
-        bsession['history'] = []
+WTF_CSRF_SECRET_KEY = "LEOGERBERH"
 
-    return bsession['history'][:-1]
+csrf = CSRFProtect()
+csrf.init_app(app)
 
-def pageparameters(pagename=None):
+# some = LoginForm()
 
-    themenu = [
-        ('/', 'UI', 'view_comfy', True ),
-        ('/device-cards', 'Devices', 'view_comfy', True),
-        ('/message-tables', 'MessageTable', 'view_comfy', True),
-        ('/login', 'Login', 'multiline_chart', False),
-        ('index', 'Index', 'multiline_chart', False)
-    ]
+print(login_manager.session_protection)
 
-    params = {
-        'loggedin': bool(flask_login.current_user.get_id()),
-        'sitename': 'lolzor',
-        'pagename': 'defaultname'
-    }
+print(dir(csrf), csrf.csrf_token)
 
-    params.update({'menu': themenu, 'flashmessages': get_flashed_messages()})
+app.register_blueprint(auth.auth_bp)
 
-    hist = historykeep(pagename)
-
-    if flask_login.current_user.get_id():
-        params.update({
-            'history': hist,
-            'useremail': flask_login.current_user.email,
-            'userimage': flask_login.current_user.profile[0].pic_hash.decode('utf-8'),
-            'username': flask_login.current_user.user_name,
-            'messages': flask_login.current_user.messages,
-            'messagelen': len(flask_login.current_user.messages),
-            'profile': flask_login.current_user.profile[0]
-        })
-    return params
 
 @app.errorhandler(401)
 def unauthorised(e):
@@ -89,10 +60,7 @@ def default():
     params = pageparameters()
     return render_template('dashboard.html.jinja', **params)
 
-def login():
-    params = pageparameters('Login')
-    params.update({'submit':'/login','signup':'/sign-up','forgot':'/forgot-password'})
-    return render_template('login.html.jinja', **params)
+
 
 def index():
     params = pageparameters('InDex')
@@ -113,7 +81,7 @@ def newdevice(id=0):
     else:
         form = DeviceForm()
 
-
+    form.csrf = app.csrf
     params.update({'submit':'/handle_new_device', 'cancel':url_for('devices')})
     return render_template('deviceform.html.jinja', **params, form = form)
 
@@ -137,9 +105,6 @@ def handlenewdevice():
 
     session.add(thedevice)
 
-
-    # name = request.form.get('name')
-    # id = request.form.get('id')
 
     session.commit()
     session.close()
@@ -170,7 +135,6 @@ def deleteuicard(device_id=0):
     session.close()
     return redirect(url_for('messagetable'))
 
-
 def rotate(l, x):
     return l[-x:] + l[:-x]
 
@@ -181,20 +145,18 @@ def nextitem(index, list):
     return list[index]
 
 def sortflipper(index, sorts, default_keys=[], default_values=[]):
-    lels = default_keys
-    positions = default_values
     index = int(index)
     sorts = sorts.split(',')
 
     mordefault = ['none'] * len(default_values)
     if index > -1 and sorts:
-        possi = positions.index(sorts[index])
-        position = nextitem(possi + 1, positions)
+        possi = default_values.index(sorts[index])
+        position = nextitem(possi + 1, default_values)
         sorts[index] = position
-        dictionary = dict(zip(lels, sorts))
+        dictionary = dict(zip(default_keys, sorts))
         return ",".join(sorts), dictionary
     else:
-        return ",".join(mordefault), dict(zip(lels, mordefault))
+        return ",".join(mordefault), dict(zip(default_keys, mordefault))
 
 
 @flask_login.login_required
@@ -234,39 +196,6 @@ def viewmessage(message_id=0):
 def handlenewmessage():
     return redirect(url_for('messagetable'))
 
-def signup():
-    params = pageparameters('Signup')
-    params.update({'submit':'/handle-sign-up', 'already':'/login', 'tos':''})
-    return render_template('sign-up.html.jinja', **params)
-
-def handlesignup():
-    return redirect(url_for('login'))
-
-def forgot():
-    params = pageparameters('Forgot Password')
-    params.update({'submit':'/handle-forgot-password', 'cancel':'/login'})
-
-    return render_template('forgot-password.html.jinja', **params)
-
-@app.route('/handle-forgot-password', methods=['POST'])
-def handleforgot():
-    return redirect(url_for('login'))
-
-def login_post():
-    email = request.form.get('email')
-    password = request.form.get('password')
-
-    user = session.query(User).filter(User.email == email).first()
-    if user and user.verify_hash(password, user.password_hash):
-        flask_login.login_user(user)
-    session.close()
-
-    if flask_login.current_user.get_id():
-        flash('You were successfully logged in !')
-        return redirect(url_for('default'))
-
-    flash('User or password where incorrect !')
-    return redirect(url_for('forgot'))
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -276,11 +205,6 @@ def load_user(user_id):
         return user
     except:
         return None
-
-@flask_login.login_required
-def logout():
-    flask_login.logout_user()
-    return redirect(url_for('index'))
 
 
 app.add_url_rule('/', view_func=default, methods=['GET'])
@@ -299,10 +223,3 @@ app.add_url_rule('/view_message/<message_id>', view_func=viewmessage, methods=['
 app.add_url_rule('/handle_new_message', view_func=handlenewmessage, methods=['POST'])
 app.add_url_rule('/delete_message/<message_id>', view_func=deletemessage, methods=['GET'])
 app.add_url_rule('/delete_device/<device_id>', view_func=deleteuicard, methods=['GET'])
-app.add_url_rule('/login', view_func=login, methods=['GET'])
-app.add_url_rule('/login', view_func=login_post, methods=['POST'])
-app.add_url_rule('/sign-up', view_func=signup, methods=['GET'])
-app.add_url_rule('/handle-sign-up', view_func=handlesignup, methods=['POST'])
-app.add_url_rule('/forgot-password', view_func=forgot, methods=['GET'])
-app.add_url_rule('/handle-forgot-password', view_func=handleforgot, methods=['POST'])
-app.add_url_rule('/logout', view_func=logout, methods=['GET'])

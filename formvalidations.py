@@ -5,6 +5,10 @@ class DeviceForm(Form):
     name = StringField('name', [validators.Length(min=4, max=25)])
     mac = StringField('mac', [validators.Length(min=6, max=35)])
 
+class LoginForm(Form):
+    email = StringField('e-mail', [validators.Length(min=4, max=25)])
+    password = StringField('password', [validators.Length(min=4, max=25)])
+
 
 class ProfileForm(Form):
     first_name = StringField('first_name', [validators.Length(min=4, max=25)])

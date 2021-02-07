@@ -16,6 +16,7 @@ pylint = "*"
 locust = "*"
 wtforms = "*"
 flask-markdown = "*"
+flask-wtf = "*"
 
 [dev-packages]
 
