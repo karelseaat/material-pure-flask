@@ -11,8 +11,8 @@ from formvalidations import *
 from flaskext.markdown import Markdown
 
 from blueprints.auth import auth
-from flask_wtf.csrf import CSRFProtect
 from formvalidations import LoginForm
+from flask_seasurf import SeaSurf
 
 session = make_session()
 
@@ -29,16 +29,10 @@ Markdown(app)
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4q8z\n\xec]/'
 
-WTF_CSRF_SECRET_KEY = "LEOGERBERH"
 
-csrf = CSRFProtect()
-csrf.init_app(app)
+csrf = SeaSurf(app)
 
-# some = LoginForm()
-
-print(login_manager.session_protection)
-
-print(dir(csrf), csrf.csrf_token)
+# print(dir(csrf), csrf)
 
 app.register_blueprint(auth.auth_bp)
 
@@ -81,7 +75,7 @@ def newdevice(id=0):
     else:
         form = DeviceForm()
 
-    form.csrf = app.csrf
+    # form.csrf = app.csrf
     params.update({'submit':'/handle_new_device', 'cancel':url_for('devices')})
     return render_template('deviceform.html.jinja', **params, form = form)
 
@@ -113,8 +107,14 @@ def handlenewdevice():
 @flask_login.login_required
 def forms():
     params = pageparameters('User Profile')
+
+    if flask_login.current_user.get_id():
+        form = ProfileForm(obj = flask_login.current_user)
+    else:
+        form = ProfileForm()
+
     params.update({'submit':'/handleprofileform', 'cancel':'/'})
-    return render_template('forms.html.jinja', **params)
+    return render_template('forms.html.jinja', **params, form=form)
 
 @flask_login.login_required
 def handleforms():
@@ -170,10 +170,20 @@ def messagetable(index="-1", sorts=""):
     return render_template('ui-tables.html.jinja',  **params)
 
 @flask_login.login_required
-def newmessage():
+def newmessage(id=0):
+    if id:
+        adevice = session.query(Message).get(id)
+        session.close()
+        if adevice:
+            form = MessageForm(obj = adevice)
+        else:
+            form = MessageForm()
+    else:
+        form = MessageForm()
+
     params = pageparameters('New Message')
     params.update({'submit':'/handle_new_message', 'cancel':''})
-    return render_template('ui-form-components.html.jinja', **params)
+    return render_template('ui-form-components.html.jinja', **params, form = form)
 
 def termsofservice():
     params = pageparameters('Terms of service')

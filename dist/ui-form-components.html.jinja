@@ -13,20 +13,27 @@
           <h5 class="mdl-card__title-text text-color--white">New message</h5>
         </div>
         <div class="mdl-card__supporting-text">
-          <form class="form form--basic" action="{{ cancel }}" method="post">
+          <form class="form form--basic" action="{{ submit }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <div class="mdl-grid">
               <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone form__article">
                 <div class="mdl-textfield mdl-js-textfield full-size">
-                  <input class="mdl-textfield__input" type="text" id="recipient" autoFocus>
-                  <label class="mdl-textfield__label" for="recipient">recipient</label>
+                  <!-- <input class="mdl-textfield__input" type="text" id="recipient" autoFocus>
+                  <label class="mdl-textfield__label" for="recipient">recipient</label> -->
+                  {{ form.recipient(class_="mdl-textfield__input") }}
+                  {{ form.recipient.label(class_="mdl-textfield__label") }}
                 </div>
                 <div class="mdl-textfield mdl-js-textfield full-size">
-                  <input class="mdl-textfield__input" type="text" id="title">
-                  <label class="mdl-textfield__label" for="title">title</label>
+                  <!-- <input class="mdl-textfield__input" type="text" id="title">
+                  <label class="mdl-textfield__label" for="title">title</label> -->
+                  {{ form.title(class_="mdl-textfield__input") }}
+                  {{ form.title.label(class_="mdl-textfield__label") }}
                 </div>
                 <div class="mdl-textfield mdl-js-textfield full-size">
-                  <textarea class="mdl-textfield__input" type="text" rows="3" id="Message"></textarea>
-                  <label class="mdl-textfield__label" for="AboutMe">Message</label>
+                  <!-- <textarea class="mdl-textfield__input" type="text" rows="3" id="Message"></textarea>
+                  <label class="mdl-textfield__label" for="AboutMe">Message</label> -->
+                  {{ form.Message(class_="mdl-textfield__input") }}
+                  {{ form.Message.label(class_="mdl-textfield__label") }}
                 </div>
 
               </div>

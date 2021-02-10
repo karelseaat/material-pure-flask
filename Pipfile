@@ -17,6 +17,7 @@ locust = "*"
 wtforms = "*"
 flask-markdown = "*"
 flask-wtf = "*"
+flask-seasurf = "*"
 
 [dev-packages]
 

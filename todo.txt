@@ -89,14 +89,14 @@ is 'sign in' niet 'login' ? (done)
 bij user profile de language, website, je abonnement plan (dat plan mag nog worden uitgewerkt !) (done)
 uitzoeken en implementeren van simpele snackbar (done)
 
-KOBOLD <<
+KOBOLD
 flask blueprints uitproberen ! (done)
 refactor sorter ! (done)
-uiteindelijk moeten we gebruik maken van een csrf token https://flask-seasurf.readthedocs.io/en/latest/
-wtform overal doorvoeren https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/ <<
+uiteindelijk moeten we gebruik maken van een csrf token https://flask-seasurf.readthedocs.io/en/latest/ (done)
+wtform overal doorvoeren https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/ (done)
 maken en inmplementeren van de popup snackbar etc. (done)
 
-HYDRA
+HYDRA <<
 toepassen van de new form en de edit form overal
 messages bij usermenu in ?
 we gooien nu de urls die op een pagina staan mee per pagina als paramerts, is het niet handiger om dit centraal te doen ?
@@ -109,11 +109,16 @@ bericht verstuur knop laten verwijzen naar juiste ding !
 darkboard verwijzingen opzoeken en vervangen met vari
 de breadcrumbs makren zoals: https://gurayyarar.github.io/AdminBSBMaterialDesign/pages/ui/breadcrumbs.html of https://materializecss.com/breadcrumbs.html
 
+ELF
 abbonementsplannen !
 toevoegen van abbonements plannen in de db models, plus internationalisation landen, website !, toevoegen bij form
 de tabel mag ook nog wrkelijk worden gesorteerd, nu is enkel de look van de tabel gedaan !
 overal implementeren van bleuprints
 de css en js kan ook in de blueprints, willen we dat, hoeveel moeite is dat ?
+
+is het niet makkelijker om user en userprifile samen te voegen ? of maken we in het form nog een form voor de profile ?
+wft form overal zinnige waarden in
+wft form in elk form veld !
 
 ELF, ,  GIANT, DRAGON, NYMPH, SATYR
 LEPRECHAUN, SPHINX, , CHIMERA, UNICORN, BASILISK

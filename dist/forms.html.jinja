@@ -19,20 +19,26 @@
 
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-              <input class="mdl-textfield__input" type="text" id="firstName" value="{{ profile.first_name }}" autoFocus />
-              <label class="mdl-textfield__label" for="firstName">First name</label>
+              <!-- <input class="mdl-textfield__input" type="text" id="firstName" value="{{ profile.first_name }}" autoFocus />
+              <label class="mdl-textfield__label" for="firstName">First name</label> -->
+              {{ form.first_name (class_="mdl-textfield__input") }}
+              {{ form.first_name.label(class_="mdl-textfield__label") }}
             </div>
 
             <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="surname" value="{{ profile.sur_name }}" />
-              <label class="mdl-textfield__label" for="surname">Sur name</label>
+              {{ form.sur_name (class_="mdl-textfield__input") }}
+              {{ form.sur_name.label(class_="mdl-textfield__label") }}
+              <!-- <input class="mdl-textfield__input" type="text" id="surname" value="{{ profile.sur_name }}" />
+              <label class="mdl-textfield__label" for="surname">Sur name</label> -->
             </div>
           </div>
 
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="email" value="{{ profile.email }}" />
-              <label class="mdl-textfield__label" for="secondName">Email</label>
+              {{ form.email (class_="mdl-textfield__input") }}
+              {{ form.email.label(class_="mdl-textfield__label") }}
+              <!-- <input class="mdl-textfield__input" type="text" id="email" value="{{ profile.email }}" />
+              <label class="mdl-textfield__label" for="secondName">Email</label> -->
             </div>
 
             <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -49,8 +55,10 @@
 
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-              <input class="mdl-textfield__input" type="text" id="website" value="{{ profile.website }}" />
-              <label class="mdl-textfield__label" for="firstName">Website</label>
+              <!-- <input class="mdl-textfield__input" type="text" id="website" value="{{ profile.website }}" />
+              <label class="mdl-textfield__label" for="firstName">Website</label> -->
+              {{ form.website (class_="mdl-textfield__input") }}
+              {{ form.website.label(class_="mdl-textfield__label") }}
             </div>
 
             <div class="mdl-textfield mdl-js-textfield getmdl-select">
@@ -89,6 +97,8 @@
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <textarea class="mdl-textfield__input" type="text" rows="3" id="AboutMe"></textarea>
             <label class="mdl-textfield__label" for="AboutMe">About me</label>
+            {{ form.AboutMe (class_="mdl-textfield__input") }}
+            {{ form.AboutMe.label(class_="mdl-textfield__label") }}
           </div>
         </div>
 

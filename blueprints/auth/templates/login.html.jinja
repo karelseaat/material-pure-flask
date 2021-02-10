@@ -8,7 +8,7 @@
     <div class="mdl-card__supporting-text color--dark-gray">
       <div class="mdl-grid">
         <form class="" action="{{ submit }}" method="post">
-
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
           <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
             <span class="mdl-card__title-text text-color--smooth-gray">DARKBOARD</span>
           </div>

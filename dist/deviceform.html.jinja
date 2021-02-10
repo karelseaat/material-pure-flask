@@ -18,6 +18,7 @@
         </div>
         <div class="mdl-card__supporting-text">
           <form class="form form--basic" action="{{ submit }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <div class="mdl-grid">
               <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone form__article">
                 {{ form.id(type="hidden") }}
