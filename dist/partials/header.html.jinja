@@ -9,14 +9,17 @@
       </label> -->
         <div class="pull-left mdl-badge mdl-badge--overlap">
       <!-- <p>{{ history }}</p> -->
+      <ul class="breadcrumb">
       {% for hist in history %}
-      {% if not loop.first %}
-        > <a href="{{ hist[0] }}">{{ hist[1] }}</a>
-      {% else %}
-        <a href="{{ hist[0] }}">{{ hist[1] }}</a>
-      {% endif %}
+
+        <li><a href="{{ hist[0] }}">{{ hist[1] }}</a></li>
+
       {% endfor %}
+    </ul>
+
+
     </div>
+
 
       <div class="mdl-textfield__expandable-holder">
         <input class="mdl-textfield__input" type="text" id="search" />

@@ -10,11 +10,11 @@
         <form class="" action="{{ submit }}" method="post">
           <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
           <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
-            <span class="mdl-card__title-text text-color--smooth-gray">DARKBOARD</span>
+            <span class="mdl-card__title-text text-color--smooth-gray">{{ pagename }}</span>
           </div>
           <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
             <span class="login-name text-color--white">Login</span>
-            <span class="login-secondary-text text-color--smoke">Enter fields to login to DARKBOARD</span>
+            <span class="login-secondary-text text-color--smoke">Enter fields to login to {{ pagename }}</span>
           </div>
           <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label full-size">

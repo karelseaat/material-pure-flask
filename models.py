@@ -76,6 +76,8 @@ class UserProfile(DictSerializableMixin):
     sur_name = Column(String(100))
     user_id = Column(ForeignKey('User.id'), index=True)
     user = relationship('User', back_populates="profile")
+    website = Column(String(100))
+    about = Column(String(100))
 
     def user_image(self):
         return self.pic_hash.decode('utf-8')

@@ -14,6 +14,7 @@
 
     <div class="mdl-card__supporting-text">
       <form action="{{ submit }}" class="form" method="post">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
         <div class="form__article">
           <h3>Personal data</h3>
 
@@ -95,10 +96,10 @@
           <h3>General skills</h3>
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" type="text" rows="3" id="AboutMe"></textarea>
-            <label class="mdl-textfield__label" for="AboutMe">About me</label>
-            {{ form.AboutMe (class_="mdl-textfield__input") }}
-            {{ form.AboutMe.label(class_="mdl-textfield__label") }}
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="about"></textarea>
+            <label class="mdl-textfield__label" for="about">About me</label>
+            {{ form.about (class_="mdl-textfield__input") }}
+            {{ form.about.label(class_="mdl-textfield__label") }}
           </div>
         </div>
 

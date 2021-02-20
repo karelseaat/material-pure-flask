@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask import session as bsession
 from flask import Blueprint, redirect, url_for, flash, get_flashed_messages
-from models import User, Device, DeviceType
+from models import User, Device, DeviceType, Message
 from helpers import pageparameters, historykeep
 from dbsession import make_session
 import flask_login
@@ -32,7 +32,6 @@ app.secret_key = b'_5#y2L"F4q8z\n\xec]/'
 
 csrf = SeaSurf(app)
 
-# print(dir(csrf), csrf)
 
 app.register_blueprint(auth.auth_bp)
 
@@ -75,7 +74,6 @@ def newdevice(id=0):
     else:
         form = DeviceForm()
 
-    # form.csrf = app.csrf
     params.update({'submit':'/handle_new_device', 'cancel':url_for('devices')})
     return render_template('deviceform.html.jinja', **params, form = form)
 
@@ -108,8 +106,13 @@ def handlenewdevice():
 def forms():
     params = pageparameters('User Profile')
 
+
     if flask_login.current_user.get_id():
-        form = ProfileForm(obj = flask_login.current_user)
+        auser = flask_login.current_user
+        allstuff = {**auser._asdict(), **auser.profile[0]._asdict()}
+        print(allstuff)
+        form = ProfileForm(**allstuff)
+        # print()
     else:
         form = ProfileForm()
 
@@ -118,6 +121,32 @@ def forms():
 
 @flask_login.login_required
 def handleforms():
+
+
+    form = ProfileForm(request.form)
+    # if form.validate():
+    #     print("OK !")
+    # else:
+    #     print(form.data)
+    #     print(dir(form), form.errors)
+
+
+    theuser = session.query(User).get(flask_login.current_user.get_id())
+    theuser.profile[0].first_name = form.first_name.data
+    theuser.profile[0].sur_name = form.sur_name.data
+    theuser.profile[0].website = form.website.data
+    theuser.profile[0].about = form.about.data
+
+
+    try:
+        session.add(theuser)
+        session.commit()
+    except Exception as e:
+        print(e)
+        session.rollback()
+
+
+    session.close()
     return redirect(url_for('default'))
 
 
@@ -125,7 +154,7 @@ def handleforms():
 def devices():
     params = pageparameters('UI Cards')
     params.update({'devices': flask_login.current_user.devices})
-    params.update({'add':'/new_device', 'delete':'/delete_device/', 'view':'/view_device/'})
+    params.update({'add':'/new_device/0', 'delete':'/delete_device/', 'view':'/new_device/'})
     return render_template('ui-cards.html.jinja', **params)
 
 @flask_login.login_required
@@ -166,24 +195,9 @@ def messagetable(index="-1", sorts=""):
     params.update({'sorts': mega})
     params.update({'keyss': dictionary})
 
-    params.update({'new':'/new_message', 'view':'/view_message/', 'cancel': '/message-tables'})
+    params.update({'new':'/view_message/0', 'view':'/view_message/', 'cancel': '/message-tables'})
     return render_template('ui-tables.html.jinja',  **params)
 
-@flask_login.login_required
-def newmessage(id=0):
-    if id:
-        adevice = session.query(Message).get(id)
-        session.close()
-        if adevice:
-            form = MessageForm(obj = adevice)
-        else:
-            form = MessageForm()
-    else:
-        form = MessageForm()
-
-    params = pageparameters('New Message')
-    params.update({'submit':'/handle_new_message', 'cancel':''})
-    return render_template('ui-form-components.html.jinja', **params, form = form)
 
 def termsofservice():
     params = pageparameters('Terms of service')
@@ -198,9 +212,22 @@ def deletemessage(message_id=0):
 
 @flask_login.login_required
 def viewmessage(message_id=0):
+
+
+    if id:
+        adevice = session.query(Message).get(message_id)
+        if adevice:
+            form = MessageForm(obj = adevice)
+        else:
+            form = MessageForm()
+
+        session.close()
+    else:
+        form = MessageForm()
+
     params = pageparameters('View Message')
     params.update({'submit':'/handle_new_message', 'cancel':''})
-    return render_template('ui-form-components.html.jinja', **params)
+    return render_template('ui-form-components.html.jinja', **params, form = form)
 
 @flask_login.login_required
 def handlenewmessage():
@@ -219,7 +246,6 @@ def load_user(user_id):
 
 app.add_url_rule('/', view_func=default, methods=['GET'])
 app.add_url_rule('/index', view_func=index, methods=['GET'])
-app.add_url_rule('/new_device', view_func=newdevice, methods=['GET'])
 app.add_url_rule('/new_device/<id>', view_func=newdevice, methods=['GET'])
 app.add_url_rule('/handle_new_device', view_func=handlenewdevice, methods=['POST'])
 app.add_url_rule('/profileform', view_func=forms, methods=['GET'])
@@ -228,7 +254,6 @@ app.add_url_rule('/device-cards', view_func=devices, methods=['GET'])
 app.add_url_rule('/tos', view_func=termsofservice, methods=['GET'])
 app.add_url_rule('/message-tables/<index>/<sorts>', view_func=messagetable, methods=['GET'])
 app.add_url_rule('/message-tables', view_func=messagetable, methods=['GET'])
-app.add_url_rule('/new_message', view_func=newmessage, methods=['GET'])
 app.add_url_rule('/view_message/<message_id>', view_func=viewmessage, methods=['GET'])
 app.add_url_rule('/handle_new_message', view_func=handlenewmessage, methods=['POST'])
 app.add_url_rule('/delete_message/<message_id>', view_func=deletemessage, methods=['GET'])

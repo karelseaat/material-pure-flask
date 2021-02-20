@@ -89,37 +89,45 @@ is 'sign in' niet 'login' ? (done)
 bij user profile de language, website, je abonnement plan (dat plan mag nog worden uitgewerkt !) (done)
 uitzoeken en implementeren van simpele snackbar (done)
 
-KOBOLD
+KOBOLD (done)
 flask blueprints uitproberen ! (done)
 refactor sorter ! (done)
 uiteindelijk moeten we gebruik maken van een csrf token https://flask-seasurf.readthedocs.io/en/latest/ (done)
 wtform overal doorvoeren https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/ (done)
 maken en inmplementeren van de popup snackbar etc. (done)
 
-HYDRA <<
-toepassen van de new form en de edit form overal
-messages bij usermenu in ?
-we gooien nu de urls die op een pagina staan mee per pagina als paramerts, is het niet handiger om dit centraal te doen ?
-geschiedenis van todo bekijken om hier nog putentn te genereren !
-.gitignore verder uitbrijden
+HYDRA (done)
+toepassen van de new form en de edit form overal (done)
+messages bij usermenu in  (nope) (done)
+we gooien nu de urls die op een pagina staan mee per pagina als paramerts, is het niet handiger om dit centraal te doen ? (prima) (done)
+geschiedenis van todo bekijken om hier nog punten te genereren ! (done)
+.gitignore verder uitbrijden << (de database mag erin !, usernames and passwds mag erin, logfiles mogen erin, ) (done)
 
-GIANT
-staat de scripts partial wel op de goede plek ?, alsin shit laad traag fix dit
-bericht verstuur knop laten verwijzen naar juiste ding !
-darkboard verwijzingen opzoeken en vervangen met vari
-de breadcrumbs makren zoals: https://gurayyarar.github.io/AdminBSBMaterialDesign/pages/ui/breadcrumbs.html of https://materializecss.com/breadcrumbs.html
+GIANT (done)
+staat de scripts partial wel op de goede plek ?, alsin shit laad traag fix dit << (done defer fixed this)
+bericht verstuur knop laten verwijzen naar juiste ding ! (done)
+darkboard verwijzingen opzoeken en vervangen met vari (done)
+de breadcrumbs makren zoals: https://gurayyarar.github.io/AdminBSBMaterialDesign/pages/ui/breadcrumbs.html of https://materializecss.com/breadcrumbs.html (done)
+is het niet makkelijker om user en userprifile samen te voegen ? of maken we in het form nog een form voor de profile ? (alles op een page en de userprofile gewoon inladen en opslaan met user) (done)
 
-ELF
-abbonementsplannen !
-toevoegen van abbonements plannen in de db models, plus internationalisation landen, website !, toevoegen bij form
-de tabel mag ook nog wrkelijk worden gesorteerd, nu is enkel de look van de tabel gedaan !
+ELF <<
+abbonementsplannen ! <<
+toevoegen van abbonements plannen in de db models, plus internationalisation landen, website !, toevoegen bij form <<
+de tabel mag ook nog wrkelijk worden gesorteerd, nu is enkel de look van de tabel gedaan ! <<
 overal implementeren van bleuprints
 de css en js kan ook in de blueprints, willen we dat, hoeveel moeite is dat ?
 
-is het niet makkelijker om user en userprifile samen te voegen ? of maken we in het form nog een form voor de profile ?
+NYMPH
 wft form overal zinnige waarden in
 wft form in elk form veld !
+faficon implementeren
+implementeren van het tags onderdeel voor devices en messges in een dropdown ?
+view message mag worden veranders naar edit message ? en anders mag de functionaliteit zo worden gedaan dat het ook enkel een view massage  gaat zijn en dus geen edit !
 
-ELF, ,  GIANT, DRAGON, NYMPH, SATYR
+we moeten uiteindelijk toch bezig met het aanmaken van een redis server en de message queue of job queue
+gezien de view van de messages geen herstuurbare of veranderbare content is mag deze is een stasisch scherm worden weergegven !
+plaatje proberen op te slaan in de picture hash voor profile !
+
+ELF, ,  GIANT, DRAGON, SATYR
 LEPRECHAUN, SPHINX, , CHIMERA, UNICORN, BASILISK
-CENTAURS, GNOME, DWARF, WHEREWOLF, DRAGON, , , YETI, CERBERUS, DRYAD
+CENTAURS, GNOME, DWARF, WHEREWOLF, DRAGON, YETI, CERBERUS, DRYAD

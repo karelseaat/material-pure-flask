@@ -15,8 +15,9 @@ class ProfileForm(Form):
     first_name = StringField('First name', [validators.Length(min=4, max=25)])
     sur_name = StringField('Sur name', [validators.Length(min=6, max=35)])
     email = StringField('E-mail', [validators.Length(min=6, max=35)])
+    country = StringField('Country', [validators.Length(min=6, max=35)])
     website = StringField('Website', [validators.Length(min=6, max=35)], widget=TextArea())
-    AboutMe = StringField('About me', [validators.Length(min=6, max=35)])
+    about = StringField('About me', [validators.Length(min=6, max=35)])
 
 
 class MessageForm(Form):

@@ -9,3 +9,5 @@ src/.sass-cache/
 .idea
 .sqlite
 .temp
+.log
+usernamesandpass.txt
