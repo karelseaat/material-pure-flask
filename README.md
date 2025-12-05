@@ -1,90 +1,45 @@
-# Material Dashboard Lite
+ # Material Dashboard Lite - Backend
 
-Welcome to first dark dashboard on the Material Design Lite!
+Welcome to the backend repository for Material Dashboard Lite, a free-to-use Material Design admin template based on Google's Material Design Lite library. This project aims to provide a responsive, cross-device compatible admin template with a dark theme, built using modern web technologies such as CSS (Scss), JavaScript (ES6), and HTML5.
 
-<a target="_blank" href="http://material-dashboard-lite.creativeit.io"><img src="https://trello-attachments.s3.amazonaws.com/56af74f7f1b5b81a201453c4/2000x1105/796e1dae05e88ba87162dd8bbf188e65/Darkboard_Showcase_1_3.png"/></a>
+## Features
 
-Its much more fun with the [demo](http://material-dashboard-lite.creativeit.io).
+- Implementation of Material Design via Material Design Lite (https://getmdl.io)
+- Uses Flask web framework for the backend
+- Includes user authentication and authorization with Flask-Login
+- Form validations using WTForms
+- Database interactions using SQLAlchemy
 
-Material admin template is absolutely free for commercial usage theme, that uses google's implementation of material design — [Material Design Lite](http://www.getmdl.io) library. It doesn’t rely on any JavaScript frameworks and aims to be responsive and optimized for cross-device usage. All components are created with CSS (scss), JavaScript (es6), and HTML5.
+## Installation & Setup
 
->**Important**: We are still working on the project and there will be much more awesome, check out our [issues](https://github.com/CreativeIT/material-dashboard-lite/issues) to see what features are coming soon.
+1. Fork or clone this repository, then navigate to your local copy:
+   ```bash
+   git clone https://github.com/<your_username>/material-dashboard-lite-backend.git
+   cd material-dashboard-lite-backend
+   ```
 
-# SETUP and USAGE
-The steps bellow will take you through cloning your own fork, installing dependencies and building:
+2. Install project dependencies with pip:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-1. Fork and/or clone our repository. To use Git from command line, see the [Setting up Git](https://help.github.com/articles/set-up-git/) and [Fork a repo](https://help.github.com/articles/fork-a-repo/) articles. 
-  
-  ```
-    git clone https://github.com/CreativeIT/material-dashboard-lite.git
-  ```
+3. Set up your SQLAlchemy database configuration in `config.py`.
 
-2. Open your copied repo folder in terminal and install [npm](https://www.npmjs.com/) components with command:
-  
-  ```
-    cd material-dashboard-lite
-    npm install
-  ```
+4. Run the Flask development server:
+   ```bash
+   export FLASK_APP=app.py && flask run --debugger
+   ```
 
-3. Install [bower](http://bower.io/) components with command:
-  
-  ```
-    bower install
-  ```
+## Usage
 
-4. Now you are able to build project with [gulp](http://gulpjs.com/):
-  
-  ```
-    gulp build
-  ```
+The application includes routes for user registration, login, password recovery, and logout using Flask-Login. The forms are validated with WTForms, and database interactions are handled using SQLAlchemy. For a complete list of available routes and their corresponding views, please refer to the `app.py` file.
 
-5. To see the result use command:
-  
-  ```
-    gulp serve
-  ```
+## Contributing
 
-# FEATURES
+We welcome contributions to this project! If you find any issues or would like to suggest new features, please open an issue on our [GitHub repository](https://github.com/CreativeIT/material-dashboard-lite-backend/issues). Pull requests are also highly encouraged for code improvements and bug fixes.
 
-*  [Material Design](http://www.google.com/design/spec/material-design/introduction.html) via [Material Design Lite](http://getmdl.io)
+## License
 
-*  Ecmascript 6 (with [babel](https://babeljs.io/))
+This project is licensed under the MIT license. For more information, please refer to the `LICENSE` file.
 
-*  Responsive dark material design. DARK, Carl!
-
-*  User experience focused
-
-*  [Sass](http://sass-lang.com/)
-
-*  [Gulp](http://gulpjs.com/) build
-
-*  [D3](https://d3js.org/) and [NVD3](http://nvd3.org/)
-
-*  MIT License
-
-# Additional
-
-Since the project uses [BEM](http://getbem.com) structure with sass, it can be customized in easy way by editing `src/variables.scss` file. To take effect you must run `gulp build` in terminal again. Also you may want to use `gulp watch`, that will run default command every time you modify any file in source folder. You can use `gulp default`if you don't want to minify js-files.
-
-Google hasn't implemented select element yet ([see why here](http://37.media.tumblr.com/6a9fcffde2da977266b0ea99b15d5803/tumblr_n42cjjsriB1smcbm7o1_400.gif)), that is why the project depends on [getmdl-select plugin](https://github.com/CreativeIT/getmdl-select). Also project uses [d3](https://d3js.org/) and [nvd3](http://nvd3.org/) to build charts and chart components.
-
-
-# Hire us
-We are ready to bring value to your business. Visit our site [creativeit.io](http://creativeit.io/) or drop us a line <hello@creativeit.io>. We will be happy to help you!
-
-
-# Credits
-
-UI components built with [Material Design Lite](http://www.getmdl.io).
-
-Designed with passion and coffee by CreativeIT
-
-# Support the project
-
-* Star the repo
-
-* Create issue report or feature request
-
-* [Tweet about it](https://twitter.com/intent/tweet?text=Wow!%20New%20%23free%20dark%20%23dashboard%20on%20%23MaterialDesignLite!%0Ahttp://creativeit.github.io/material-dashboard-lite/index.html%0A&via=CreativeITeam&hashtags=materialDesign,responsive,UI,JS)
-
-* Follow [us on Twitter](https://twitter.com/intent/follow?screen_name=CreativeITeam)
+Enjoy using Material Dashboard Lite! If you find it helpful, don't forget to star the repository on GitHub.
